@@ -78,7 +78,9 @@ class TwitterOAuth {
       $parameters['oauth_callback'] = $oauth_callback;
     } 
     $request = $this->oAuthRequest($this->requestTokenURL(), 'GET', $parameters);
+    var_dump($request);
     $token = OAuthUtil::parse_parameters($request);
+    var_dump($token);
     $this->token = new OAuthConsumer($token['oauth_token'], $token['oauth_token_secret']);
     return $token;
   }

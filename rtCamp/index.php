@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    require_once('twitteroauth/twitteroauth.php');
+    require_once('twitteroauth/config.php');
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -29,14 +34,13 @@
 
         <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
 
-            <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="navbar navbar-fixed-top">
                 <div class="navbar-inner">
                     <div class="container">
                         <a class="brand" href="#">rtCamp Test</a>
                     </div>
                 </div>
             </div>
-
             <div class="container">
 
                 <div class="clearfix">&nbsp;</div>
@@ -44,10 +48,9 @@
                 <div class="clearfix">&nbsp;</div>
                 <div class="clearfix">&nbsp;</div>
                 <div class="clearfix">&nbsp;</div>
-                
 
                 <div class="hero-unit">
-                    <button class="btn btn-primary btn-large offset4">Login with Twitter</button>
+                    <a href="redirect.php" class="btn btn-primary btn-large offset4">Login with Twitter</a>
                 </div>
 
                 <div class="clearfix">&nbsp;</div>
