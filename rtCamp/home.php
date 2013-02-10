@@ -9,10 +9,11 @@
 session_start();
 require_once('twitteroauth/twitteroauth.php');
 require_once('twitteroauth/config.php');
+require_once ('User.php');
 
 /* If access tokens are not available redirect to connect page. */
 if (empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_token']) || empty($_SESSION['access_token']['oauth_token_secret'])) {
-    header('Location: clearsessions.php');
+    header('Location: clearsession.php');
 }
 /* Get user access tokens out of the session. */
 $access_token = $_SESSION['access_token'];
@@ -21,7 +22,8 @@ $access_token = $_SESSION['access_token'];
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
 /* If method is set change API call made. Test is called by default. */
-$user = $connection->get('account/verify_credentials');
+$user = new User($connection->get('account/verify_credentials'));
+$_SESSION['user']=serialize($user);
 
 ?>
 <!DOCTYPE html>
@@ -33,7 +35,7 @@ $user = $connection->get('account/verify_credentials');
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>rtCamp Test | <?php echo $user->name;?></title>
+        <title>rtCamp Test</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -52,35 +54,42 @@ $user = $connection->get('account/verify_credentials');
     </head>
     <body>
         <!--[if lt IE 7]>
-        <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+        <p class="chromeframe">You are using an <strong>outdated</strong> browser.
+        Please <a href="http://browsehappy.com/">upgrade your browser</a> or
+        <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-
-        <!-- This code is taken from http://twitter.github.com/bootstrap/examples/hero.html -->
-
+ 
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
                     <a class="brand" href="#">rtCamp Test</a>
                     <ul class="nav">
                         <li class="divider-vertical"></li>
-                        <li><img src="<?php echo "$user->profile_image_url"; ?>"></li>
-                        <li class="divider-vertical"></li>
-                        <li class="navbar-text"><?php echo $user->name;?></li>
+                        <li id="liName" class="navbar-text"></li>
+                        <li id="liScreenName" class="navbar-text"></li>
                     </ul>
                     <a href="clearsession.php" class="btn btn-danger pull-right">Logout</a>
                 </div>
             </div>
         </div>
-        <div id="body" class="container">
-            
+
+        <div class="container">
+            <div class="container-fluid row">
+                <div id="profile_pic" class="container-fluid span"></div>
+                <div id="wall" class="container-fluid span9">
+                    <span class="element">Hello, Welcome !</span>
+                </div>
+            </div>
+            <div class="container navbar navbar-fixed-bottom">
+                <hr>
+                <footer>
+                    <p class="pull-right">&copy; Udit Desai</p>
+                </footer>
+            </div>
         </div>
-        <div class="container navbar navbar-fixed-bottom">
-            <hr>
-            <footer>
-                <p class="pull-right">&copy; Udit Desai</p>
-            </footer>
-        </div>
+
         <script src="js/jquery-1.8.3.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>

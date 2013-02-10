@@ -12,7 +12,7 @@ require_once('twitteroauth/config.php');
 /* If access tokens are not available redirect to connect page. */
 if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {
     $_SESSION['oauth_status'] = 'oldtoken';
-    header('Location: ./clearsessions.php');
+    header('Location: ./clearsession.php');
 }
 
 /* Create TwitteroAuth object with app key/secret and token key/secret from default phase */
@@ -34,7 +34,7 @@ if (200 == $connection->http_code) {
     $_SESSION['status'] = 'verified';
     header('Location: home.php');
 } else {
-    /* Save HTTP status for error dialog on connnect page.*/
-    header('Location: clearsessions.php');
+    /* Error*/
+    header('Location: error.html');
 }
 ?>

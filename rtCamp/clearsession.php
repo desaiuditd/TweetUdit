@@ -10,5 +10,5 @@ session_start();
 session_destroy();
 
 /* Redirect to page with the connect to Twitter option. */
-header('Location: index.php');
+header('Location: index.html');
 ?>

@@ -6,7 +6,9 @@
         Purpose of the stylesheet follows.
 */
 
-#body { 
-    
+#wall {
+    border-radius: 0.5em;
+    opacity: 0.6;
+    filter: alpha(60);
+    background
 }
-
