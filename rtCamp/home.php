@@ -62,7 +62,7 @@ $_SESSION['user']=serialize($user);
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <a class="brand" href="#">rtCamp Test</a>
+                    <span class="brand">rtCamp Test</span>
                     <ul class="nav">
                         <li class="divider-vertical"></li>
                         <li id="liName" class="navbar-text"></li>
@@ -77,7 +77,25 @@ $_SESSION['user']=serialize($user);
             <div class="container-fluid row">
                 <div id="profile_pic" class="container-fluid span"></div>
                 <div id="wall" class="container-fluid span9">
-                    <span class="element">Hello, Welcome !</span>
+
+                    <div id="divTweets" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="active item">
+                                Hello
+                            </div>
+
+                            <div class="item">
+                                How are
+                            </div>
+
+                            <div class="item">
+                                Khaana
+                            </div>
+                        </div>
+                        <a class="carousel-control left" href="#divTweets" data-slide="prev">&lsaquo;</a>
+                        <a class="carousel-control right" href="#divTweets" data-slide="next">&rsaquo;</a>
+                    </div>
+
                 </div>
             </div>
             <div class="container navbar navbar-fixed-bottom">
