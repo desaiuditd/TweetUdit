@@ -36,4 +36,10 @@ $(document).ready(function() {
       $("body").css("background-repeat","no-repeat");
       $("body").css("background-position","left center");
     },"json");
+
+    var source = $("#tmpltTweets").html();
+    var template = Handlebars.compile(source);
+    var html = template();
+
+    $("#wall").append(html);
 });
