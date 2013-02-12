@@ -4,6 +4,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+require_once ('Tweet.php');
+
 class User {
     private $id;
     private $screen_name;
@@ -12,10 +14,11 @@ class User {
     private $profile_background_image_url;
     private $profile_sidebar_fill_color;
     private $profile_background_color;
-    private $profile_text_color;
+
+    private $tweets = array();
 
     public function __construct($details) {
-        $this->set_id($details->id);
+        $this->set_id($details->id_str);
         $this->set_screen_name($details->screen_name);
         $this->set_name($details->name);
         $this->set_profile_image_url($details->profile_image_url);
@@ -80,12 +83,13 @@ class User {
         $this->profile_background_color = $profile_background_color;
     }
 
-    public function get_profile_text_color() {
-        return $this->profile_text_color;
+
+    public function get_tweets() {
+        return json_encode($this->tweets);
     }
 
-    public function set_profile_text_color($profile_text_color) {
-        $this->profile_text_color = $profile_text_color;
+    public function set_tweets($tweet) {
+        $this->tweets[] = $tweet;
     }
 }
 ?>

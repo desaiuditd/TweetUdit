@@ -76,7 +76,9 @@ $_SESSION['user']=serialize($user);
         <div class="container">
             <div class="container-fluid row">
                 <div id="profile_pic" class="container-fluid span"></div>
-                <div id="wall" class="container-fluid span9"></div>
+                <div id="wall" class="container-fluid span9">
+                    <h4 class="offset3">My Home Timeline</h4>
+                </div>
             </div>
             <div class="container navbar navbar-fixed-bottom">
                 <hr>
@@ -90,17 +92,20 @@ $_SESSION['user']=serialize($user);
     <script id="tmpltTweets" type="text/x-handlebars-template">
         <div id="divTweets" class="carousel slide">
             <div class="carousel-inner">
-                <div class="active item">
-                    Hello
-                </div>
+                {{#each this}}
+                    <div class="container-fluid tweet-box item">
 
-                <div class="item">
-                    How are
-                </div>
-
-                <div class="item">
-                    Khaana
-                </div>
+                        <div class="container-fluid row tweet-text">
+                            <div class="container-fluid span">
+                                <img src="{{user_profile_image}}">
+                                <span><em><strong> @ {{user}} : </strong></em>{{created_at}}</span>
+                            </div>
+                            <div class="container-fluid span" style="margin-top: 1%">
+                                {{text}}
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
             </div>
             <a class="carousel-control left" href="#divTweets" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#divTweets" data-slide="next">&rsaquo;</a>
