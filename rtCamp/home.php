@@ -76,27 +76,7 @@ $_SESSION['user']=serialize($user);
         <div class="container">
             <div class="container-fluid row">
                 <div id="profile_pic" class="container-fluid span"></div>
-                <div id="wall" class="container-fluid span9">
-
-                    <div id="divTweets" class="carousel slide">
-                        <div class="carousel-inner">
-                            <div class="active item">
-                                Hello
-                            </div>
-
-                            <div class="item">
-                                How are
-                            </div>
-
-                            <div class="item">
-                                Khaana
-                            </div>
-                        </div>
-                        <a class="carousel-control left" href="#divTweets" data-slide="prev">&lsaquo;</a>
-                        <a class="carousel-control right" href="#divTweets" data-slide="next">&rsaquo;</a>
-                    </div>
-
-                </div>
+                <div id="wall" class="container-fluid span9"></div>
             </div>
             <div class="container navbar navbar-fixed-bottom">
                 <hr>
@@ -105,9 +85,31 @@ $_SESSION['user']=serialize($user);
                 </footer>
             </div>
         </div>
-
-        <script src="js/jquery-1.8.3.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/main.js"></script>
     </body>
+
+    <script id="tmpltTweets" type="text/x-handlebars-template">
+        <div id="divTweets" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="active item">
+                    Hello
+                </div>
+
+                <div class="item">
+                    How are
+                </div>
+
+                <div class="item">
+                    Khaana
+                </div>
+            </div>
+            <a class="carousel-control left" href="#divTweets" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#divTweets" data-slide="next">&rsaquo;</a>
+        </div>
+    </script>
+
+    <script src="js/jquery-1.8.3.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/handlebars.js"></script>
+    <script src="js/main.js"></script>
+
 </html>
