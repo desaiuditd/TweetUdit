@@ -97,7 +97,7 @@ $_SESSION['user']=serialize($user);
 
                         <div class="container-fluid row tweet-text">
                             <div class="container-fluid span">
-                                <img src="{{user_profile_image}}">
+                                <img class="img-polaroid" src="{{user_profile_image}}">
                                 <span><em><strong> @ {{user}} : </strong></em>{{created_at}}</span>
                             </div>
                             <div class="container-fluid span" style="margin-top: 1%">
