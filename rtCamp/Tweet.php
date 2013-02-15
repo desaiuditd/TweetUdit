@@ -60,7 +60,7 @@ class Tweet implements JsonSerializable {
     }
 
     public function jsonSerialize() {
-        return ['id'=>  $this->id,'text'=>  $this->text,'user'=>  $this->user,'user_profile_image'=>  $this->user_profile_image,'created_at'=>  $this->created_at];
+        return array('id'=>  $this->id,'text'=>  $this->text,'user'=>  $this->user,'user_profile_image'=>  $this->user_profile_image,'created_at'=>  $this->created_at);
     }
 }
 ?>
