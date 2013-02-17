@@ -1,0 +1,25 @@
+/* 
+    Document   : main.css
+    Created on : 9 Feb, 2013, 9:09:57 PM
+    Author     : Udit Desai
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+#wall {
+    border-radius: 0.5em;
+    opacity: 0.6;
+    filter: alpha(60);
+}
+
+.tweet-box {
+    border-radius: 0.5em;
+    background-image: -moz-linear-gradient(top, #FEFEFE, #FFFFFF);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FEFEFE), to(#FFFFFF));
+    background-image: -webkit-linear-gradient(top, #FEFEFE, #FFFFFF);
+    background-image: -o-linear-gradient(top, #FEFEFE, #FFFFFF);
+    background-image: linear-gradient(to bottom, #FEFEFE, #FFFFFF);
+    background-repeat: repeat-x;
+    margin: 10%;
+    padding: 1%
+}
