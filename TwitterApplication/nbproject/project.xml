@@ -2,10 +2,10 @@
     <type>org.netbeans.modules.php.project</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/php-project/1">
-            <name>TwittrApplication</name>
+            <name>TwitterApplication</name>
         </data>
         <spellchecker-wordlist xmlns="http://www.netbeans.org/ns/spellchecker-wordlist/1">
-            <word>rtCamp</word>
+            <word>TwitterApplication</word>
         </spellchecker-wordlist>
     </configuration>
 </project>
