@@ -11,7 +11,7 @@ $(document).ready(function() {
     },"json");
 
     $.post("services/getScreenName.php",function(data) {
-        $("#liScreenName").html("&nbsp;<strong><em>(@"+data.screenName+")</em></strong");
+        $("#liScreenName").html("&nbsp;<strong><em>(@"+data.screenName+")</em></strong>");
     },"json");
 
     $.post("services/getProfileImageURL.php",function(data) {
@@ -41,7 +41,7 @@ $(document).ready(function() {
         var source = $("#tmpltTweets").html();
         var template = Handlebars.compile(source);
         var html = template(data);
-        $("#wall").append(html);
+        $("#wall h4").after(html);
         $("#divTweets").carousel("cycle");
     },"json");
 });

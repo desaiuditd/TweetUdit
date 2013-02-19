@@ -35,7 +35,7 @@ $_SESSION['user']=serialize($user);
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>rtCamp Test</title>
+        <title>TweetUdit</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
@@ -62,7 +62,7 @@ $_SESSION['user']=serialize($user);
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container">
-                    <span class="brand">rtCamp Test</span>
+                    <a href="home.php" class="brand">TweetUdit</a>
                     <ul class="nav">
                         <li class="divider-vertical"></li>
                         <li id="liName" class="navbar-text"></li>
@@ -78,6 +78,11 @@ $_SESSION['user']=serialize($user);
                 <div id="profile_pic" class="container-fluid span"></div>
                 <div id="wall" class="container-fluid span9">
                     <h4 class="offset3">My Home Timeline</h4>
+                    <div class="container-fluid pull-right">
+                        <a href="downloadTweets.php" class="btn btn-primary">Download Tweets</a>
+                    </div>
+                    <div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div>
                 </div>
             </div>
             <div class="container navbar navbar-fixed-bottom">
