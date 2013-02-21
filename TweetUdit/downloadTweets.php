@@ -37,29 +37,21 @@ $html = '
 
     </style>
     <body>
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <h4 class="navbar-text">TweetUdit</h4>
-                    <span id="liName" class="navbar-text">'.$user->get_name().'</span>
-                    <span id="liScreenName" class="navbar-text">&nbsp;<strong><em>(@'.$user->get_screen_name().')</em></strong></span>
-                    <img class="img-polaroid" src="'.$user->get_profile_image_url().'">
-                </div>
-            </div>
+        <div id="wall" class="container">
+            <h4 class="navbar-text">TweetUdit</h4>
+            <span id="liName" class="navbar-text">'.$user->get_name().'</span>
+            <span id="liScreenName" class="navbar-text">&nbsp;<strong><em>(@'.$user->get_screen_name().')</em></strong></span>
+            <img class="img-polaroid" src="'.$user->get_profile_image_url().'">
         </div>
 
-        <div class="clearfix">&nbsp;</div>
-        <div class="clearfix">&nbsp;</div>
-        <div class="clearfix">&nbsp;</div>
-        <div class="clearfix">&nbsp;</div>
         <div class="clearfix">&nbsp;</div>
         <div class="clearfix">&nbsp;</div>
         <div class="clearfix">&nbsp;</div>
 
         <div class="container">
             <div class="container-fluid row">
-                <div id="wall" class="container-fluid span9">
-                    <h4 class="offset3">My Home Timeline</h4>';
+                <div id="wall" class="container-fluid">
+                    <h4>My Home Timeline</h4>';
 
 foreach ($user->get_tweets_object() as $tweet) {
 
