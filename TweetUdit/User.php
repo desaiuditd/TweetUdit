@@ -84,8 +84,12 @@ class User {
     }
 
 
-    public function get_tweets() {
+    public function get_tweets_json() {
         return json_encode($this->tweets);
+    }
+
+    public function get_tweets_object() {
+        return $this->tweets;
     }
 
     public function set_tweets($tweet) {

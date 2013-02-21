@@ -26,5 +26,6 @@ $tweets = $connection->get("statuses/home_timeline",array("count"=>10,"exclude_r
 foreach ($tweets as $tweet) {
     $user->set_tweets(new Tweet($tweet->id_str, $tweet->text, $tweet->user->screen_name, $tweet->user->profile_image_url, $tweet->created_at));
 }
-echo $user->get_tweets();
+$_SESSION['user']=  serialize($user);
+echo $user->get_tweets_json();
 ?>

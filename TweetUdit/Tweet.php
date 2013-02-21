@@ -11,7 +11,7 @@ class Tweet implements JsonSerializable {
     private $user_profile_image;
     private $created_at;
 
-    function __construct($id, $text, $user, $user_profile_image, $created_at) {
+    public function __construct($id, $text, $user, $user_profile_image, $created_at) {
         $this->id = $id;
         $this->text = $text;
         $this->user = $user;
@@ -19,7 +19,7 @@ class Tweet implements JsonSerializable {
         $this->created_at = $created_at;
     }
 
-        public function get_id() {
+    public function get_id() {
         return $this->id;
     }
 
