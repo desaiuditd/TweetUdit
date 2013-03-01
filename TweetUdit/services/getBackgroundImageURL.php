@@ -7,6 +7,10 @@
 session_start();
 require_once ('../User.php');
 
+if (empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_token']) || empty($_SESSION['access_token']['oauth_token_secret'])) {
+    header('Location: ../clearsession.php');
+}
+
 $user = unserialize($_SESSION['user']);
 echo json_encode(array("bgImageURL"=>$user->get_profile_background_image_url()));
 ?>

@@ -23,12 +23,12 @@ $(document).ready(function() {
     },"json");
 
     $.post("services/getSidebarColor.php",function(data) {
-        $("#wall").css("background-image","-moz-linear-gradient(top, #"+data.sbColor+", #FEFEFE)");
-        $("#wall").css("background-image","-webkit-gradient(linear, 0 0, 0 100%, to(#"+data.sbColor+"), from(#FEFEFE))");
-        $("#wall").css("background-image","-webkit-linear-gradient(top, #"+data.sbColor+", #FEFEFE)");
-        $("#wall").css("background-image","-o-linear-gradient(top, #"+data.sbColor+", #FEFEFE)");
-        $("#wall").css("background-image","linear-gradient(to bottom, #"+data.sbColor+", #FEFEFE)");
-        $("#wall").css("background-repeat","repeat-x");
+        $("#wall,#followers").css("background-image","-moz-linear-gradient(top, #"+data.sbColor+", #FEFEFE)");
+        $("#wall,#followers").css("background-image","-webkit-gradient(linear, 0 0, 0 100%, to(#"+data.sbColor+"), from(#FEFEFE))");
+        $("#wall,#followers").css("background-image","-webkit-linear-gradient(top, #"+data.sbColor+", #FEFEFE)");
+        $("#wall,#followers").css("background-image","-o-linear-gradient(top, #"+data.sbColor+", #FEFEFE)");
+        $("#wall,#followers").css("background-image","linear-gradient(to bottom, #"+data.sbColor+", #FEFEFE)");
+        $("#wall,#followers").css("background-repeat","repeat-x");
     },"json");
 
     $.post("services/getBackgroundImageURL.php",function(data) {
@@ -43,5 +43,9 @@ $(document).ready(function() {
         var html = template(data);
         $("#wall h4").after(html);
         $("#divTweets").carousel("cycle");
+    },"json");
+
+    $.post("services/getFollowers.php",function(data) {
+        console.log(data);
     },"json");
 });

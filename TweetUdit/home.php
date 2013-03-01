@@ -84,6 +84,9 @@ $_SESSION['user']=serialize($user);
                     <div class="clearfix">&nbsp;</div>
                     <div class="clearfix">&nbsp;</div>
                 </div>
+                <div id="followers" class="container-fluid span">
+                    
+                </div>
             </div>
             <div class="container navbar navbar-fixed-bottom">
                 <hr>
@@ -114,6 +117,17 @@ $_SESSION['user']=serialize($user);
             </div>
             <a class="carousel-control left" href="#divTweets" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#divTweets" data-slide="next">&rsaquo;</a>
+        </div>
+    </script>
+
+    <script id="tmpltFollowers" type="text/handlebars-template">
+        <div class="container-fluid">
+            {{#each this}}
+                <div class="container-fluid row">
+                    <img class="img-polaroid" src="{{user_profile_image}}">
+                    <span><em><strong> <a>@{{user}}</a> </strong></em></span>
+                </div>
+            {{/each}}
         </div>
     </script>
 
