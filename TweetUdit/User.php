@@ -100,5 +100,17 @@ class User {
     public function set_tweets($tweet) {
         $this->tweets[] = $tweet;
     }
+
+    public function jsonSerialize() {
+
+        return array('id'=>  $this->id,
+                    'screen_name'=>  $this->screen_name,
+                    'name'=>  $this->name,
+                    'profile_image_url'=>  $this->profile_image_url,
+                    'profile_background_image_url'=>  $this->profile_background_image_url,
+                    'profile_sidebar_fill_color'=> $this->profile_sidebar_fill_color,
+                    'profile_background_color'=> $this->profile_background_color,
+                    'tweets'=> $this->tweets);
+    }
 }
 ?>

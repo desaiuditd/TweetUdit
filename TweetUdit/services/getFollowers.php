@@ -21,9 +21,14 @@ $user = unserialize($_SESSION['user']);
 /* Create a TwitterOauth object with consumer/user tokens. */
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
-echo $user->get_id()."<br>";
+$followers = $connection->get("followers/ids",array("user_id"=>$user->get_id(),"count"=>10,"stringify_ids"=>true));
+$data = array();
 
-$followers = $connection->get("followers/list",array("screen_name"=>$user->get_screen_name(),"skip_statuses"=>"true","include_user_entities"=>"false"));
+foreach ($followers->ids as $follower) {
 
-echo "data : ".$followers;
+    $temp = new User($connection->get("users/show",array("user_id"=>$follower,"includes_enntities"=>false)));
+    $data[] = $temp->jsonSerialize();
+}
+
+echo json_encode($data);
 ?>
