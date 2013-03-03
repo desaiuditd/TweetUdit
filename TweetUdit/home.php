@@ -76,8 +76,8 @@ $_SESSION['user']=serialize($user);
         <div class="container">
             <div class="container-fluid row">
                 <div id="profile_pic" class="container-fluid span"></div>
-                <div id="wall" class="container-fluid span9">
-                    <h4 class="offset3">My Home Timeline</h4>
+                <div id="wall" class="container-fluid span6">
+                    <h4 class="offset1">My Home Timeline</h4>
                     <div class="container-fluid pull-right">
                         <a href="downloadTweets.php" class="btn btn-primary">Download Tweets</a>
                     </div>
@@ -85,9 +85,10 @@ $_SESSION['user']=serialize($user);
                     <div class="clearfix">&nbsp;</div>
                 </div>
                 <div id="followers" class="container-fluid span">
-                    
+                    <h5>Followers</h5>
                 </div>
             </div>
+            <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
             <div class="container navbar navbar-fixed-bottom">
                 <hr>
                 <footer>
@@ -124,8 +125,8 @@ $_SESSION['user']=serialize($user);
         <div class="container-fluid">
             {{#each this}}
                 <div class="container-fluid row">
-                    <img class="img-polaroid" src="{{user_profile_image}}">
-                    <span><em><strong> <a>@{{user}}</a> </strong></em></span>
+                    <img class="img-polaroid" src="{{profile_image_url}}">
+                    <span><a>@{{screen_name}}</a></span>
                 </div>
             {{/each}}
         </div>

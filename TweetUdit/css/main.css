@@ -6,7 +6,7 @@
         Purpose of the stylesheet follows.
 */
 
-#wall {
+#wall,#followers {
     border-radius: 0.5em;
     opacity: 0.6;
     filter: alpha(60);

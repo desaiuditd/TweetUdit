@@ -46,6 +46,9 @@ $(document).ready(function() {
     },"json");
 
     $.post("services/getFollowers.php",function(data) {
-        console.log(data);
+        var source = $("#tmpltFollowers").html();
+        var template = Handlebars.compile(source);
+        var html = template(data);
+        $("#followers").append(html);
     },"json");
 });
