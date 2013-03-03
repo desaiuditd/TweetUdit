@@ -20,6 +20,8 @@ $(document).ready(function() {
 
     $.post("services/getBackgroundColor.php",function(data) {
         $("body").css("background-color","#"+data.bgColor);
+        $("#footer").css("background-color","#"+data.bgColor);
+        
     },"json");
 
     $.post("services/getSidebarColor.php",function(data) {

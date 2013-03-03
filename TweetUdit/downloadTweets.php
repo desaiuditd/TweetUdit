@@ -95,7 +95,7 @@ $mpdf->WriteHTML($css,1);
 
 $mpdf->WriteHTML($html);
 
-$mpdf->Output();
+$mpdf->Output("TweetUdit.pdf","D");
 
 exit;
 ?>

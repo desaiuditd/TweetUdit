@@ -89,7 +89,7 @@ $_SESSION['user']=serialize($user);
                 </div>
             </div>
             <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
-            <div class="container navbar navbar-fixed-bottom">
+            <div id="footer" class="container navbar navbar-fixed-bottom">
                 <hr>
                 <footer>
                     <p class="pull-right">&copy; Udit Desai</p>
