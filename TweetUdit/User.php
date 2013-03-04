@@ -18,13 +18,24 @@ class User {
     private $tweets = array();
 
     public function __construct($details) {
-        $this->set_id($details->id_str);
-        $this->set_screen_name($details->screen_name);
-        $this->set_name($details->name);
-        $this->set_profile_image_url($details->profile_image_url);
-        $this->set_profile_background_image_url($details->profile_background_image_url);
-        $this->set_profile_sidebar_fill_color($details->profile_sidebar_fill_color);
-        $this->set_profile_background_color($details->profile_background_color);
+
+        if(!is_array($details)) {
+            $this->set_id($details->id_str);
+            $this->set_screen_name($details->screen_name);
+            $this->set_name($details->name);
+            $this->set_profile_image_url($details->profile_image_url);
+            $this->set_profile_background_image_url($details->profile_background_image_url);
+            $this->set_profile_sidebar_fill_color($details->profile_sidebar_fill_color);
+            $this->set_profile_background_color($details->profile_background_color);
+        } else {
+            $this->set_id($details['id']);
+            $this->set_screen_name($details['screen_name']);
+            $this->set_name($details['name']);
+            $this->set_profile_image_url($details['profile_image_url']);
+            $this->set_profile_background_image_url($details['profile_background_image_url']);
+            $this->set_profile_sidebar_fill_color($details['profile_sidebar_fill_color']);
+            $this->set_profile_background_color($details['profile_background_color']);
+        }
     }
 
     public function get_id() {
