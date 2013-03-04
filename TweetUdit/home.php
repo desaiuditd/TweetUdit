@@ -126,7 +126,7 @@ $_SESSION['user']=serialize($user);
             {{#each this}}
                 <div class="container-fluid row">
                     <img class="img-polaroid" src="{{profile_image_url}}">
-                    <span><a>@{{screen_name}}</a></span>
+                    <span><a class="follower" href="#">@{{screen_name}}</a></span>
                 </div>
             {{/each}}
         </div>

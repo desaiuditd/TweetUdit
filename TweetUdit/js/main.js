@@ -5,23 +5,23 @@
 
 
 $(document).ready(function() {
+
     $.post("services/getName.php",function(data) {
         $("title").append(" | "+data.name);
         $("#liName").html(data.name);
     },"json");
 
     $.post("services/getScreenName.php",function(data) {
-        $("#liScreenName").html("&nbsp;<strong><em>(@"+data.screenName+")</em></strong>");
+        $("#liScreenName").html("&nbsp;<strong><em><a href='home.php'>(@"+data.screenName+")</a></em></strong>");
     },"json");
 
     $.post("services/getProfileImageURL.php",function(data) {
-        $("#profile_pic").append("<img class='img-polaroid' src='"+data.profileImageURL+"'>");
+        $("#profile_pic").append("<a href='home.php'><img class='img-polaroid' src='"+data.profileImageURL+"'></a>");
     },"json");
 
     $.post("services/getBackgroundColor.php",function(data) {
         $("body").css("background-color","#"+data.bgColor);
         $("#footer").css("background-color","#"+data.bgColor);
-        
     },"json");
 
     $.post("services/getSidebarColor.php",function(data) {
@@ -53,4 +53,10 @@ $(document).ready(function() {
         var html = template(data);
         $("#followers").append(html);
     },"json");
+
+    $(document).on("click",".follower",function(e) {
+        $.post("services/getTweetsTimeline.php",{ screen_name : $this.html() },function(data){
+            console.log(data);
+        },"json");
+    });
 });
