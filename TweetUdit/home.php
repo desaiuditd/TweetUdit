@@ -9,6 +9,7 @@
 session_start();
 require_once('twitteroauth/twitteroauth.php');
 require_once('twitteroauth/config.php');
+require_once('DBConfig.php');
 require_once ('User.php');
 
 /* If access tokens are not available redirect to connect page. */
@@ -23,7 +24,39 @@ $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oau
 
 /* If method is set change API call made. Test is called by default. */
 $user = new User($connection->get('account/verify_credentials'));
-$_SESSION['user']=serialize($user);
+
+$con = mysqli_connect($host,$username,$password,$dbName);
+if(mysqli_connect_errno($con)) {
+    header('Location: DBError.html');
+}
+
+$rs = mysqli_query($con,"select id from user where id='".$user->get_id()."'");
+
+if($rs =  mysqli_fetch_array($rs)) {
+
+    mysqli_query($con, "update user
+                            set id = '".$user->get_id()."',
+                            screen_name = '".$user->get_screen_name()."',
+                            name = '".$user->get_name()."',
+                            profile_image_url = '".$user->get_profile_image_url()."',
+                            profile_background_image_url = '".$user->get_profile_background_image_url()."',
+                            profile_sidebar_fill_color = '".$user->get_profile_sidebar_fill_color()."',
+                            profile_background_color = '".$user->get_profile_background_color()."'
+                        where id = '".$user->get_id()."'");
+} else {
+
+    mysqli_query($con, "insert into user values (
+                            '".$user->get_id()."',
+                            '".$user->get_screen_name()."',
+                            '".$user->get_name()."',
+                            '".$user->get_profile_image_url()."',
+                            '".$user->get_profile_background_image_url()."',
+                            '".$user->get_profile_sidebar_fill_color()."',
+                            '".$user->get_profile_background_color()."')");
+}
+
+mysqli_close($con);
+$_SESSION['user']=$user->get_id();
 
 ?>
 <!DOCTYPE html>
@@ -106,8 +139,8 @@ $_SESSION['user']=serialize($user);
 
                         <div class="container-fluid row tweet-text">
                             <div class="container-fluid span">
-                                <img class="img-polaroid" src="{{user_profile_image}}">
-                                <span><em><strong> @{{user}} : </strong></em>{{created_at}}</span>
+                                <img class="img-polaroid" src="{{creater_profile_image}}">
+                                <span><em><strong> @{{created_by}} : </strong></em>{{created_at}}</span>
                             </div>
                             <div class="container-fluid span" style="margin-top: 1%">
                                 {{text}}
