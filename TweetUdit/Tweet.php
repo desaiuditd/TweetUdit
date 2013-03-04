@@ -7,8 +7,8 @@
 class Tweet {
     private $id;
     private $text;
-    private $user;
-    private $user_profile_image;
+    private $created_by;
+    private $creater_profile_image;
     private $created_at;
 
     private function getDay($i) {
@@ -40,11 +40,11 @@ class Tweet {
         }
     }
 
-    public function __construct($id, $text, $user, $user_profile_image, $created_at) {
+    public function __construct($id, $text, $created_by, $creater_profile_image, $created_at) {
         $this->id = $id;
         $this->text = $text;
-        $this->user = $user;
-        $this->user_profile_image = $user_profile_image;
+        $this->created_by = $created_by;
+        $this->creater_profile_image = $creater_profile_image;
         $this->created_at = "";
         $this->created_at .= $this->getDay(idate("w", strtotime($created_at)))." ";
         $this->created_at .= $this->getMonth(idate("m", strtotime($created_at)))." ";
@@ -71,20 +71,20 @@ class Tweet {
         $this->text = $text;
     }
 
-    public function get_user() {
-        return $this->user;
+    public function get_created_by() {
+        return $this->created_by;
     }
 
-    public function set_user($user) {
-        $this->user = $user;
+    public function set_created_by($created_by) {
+        $this->created_by = $created_by;
     }
 
-    public function get_user_profile_image() {
-        return $this->user_profile_image;
+    public function get_creater_profile_image() {
+        return $this->creater_profile_image;
     }
 
-    public function set_user_profile_image($user_profile_image) {
-        $this->user_profile_image = $user_profile_image;
+    public function set_creater_profile_image($creater_profile_image) {
+        $this->creater_profile_image = $creater_profile_image;
     }
 
     public function get_created_at() {
@@ -98,8 +98,8 @@ class Tweet {
     public function jsonSerialize() {
         return array('id'=>  $this->id,
                     'text'=>  $this->text,
-                    'user'=>  $this->user,
-                    'user_profile_image'=>  $this->user_profile_image,
+                    'created_by'=>  $this->created_by,
+                    'creater_profile_image'=>  $this->creater_profile_image,
                     'created_at'=>  $this->created_at);
     }
 }
