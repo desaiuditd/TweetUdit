@@ -8,13 +8,34 @@ session_start();
 require_once ('User.php');
 require_once ('Tweet.php');
 require_once ('mPDF/mpdf.php');
+require_once ('DBConfig.php');
 
 /* If access tokens are not available redirect to connect page. */
 if (empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_token']) || empty($_SESSION['access_token']['oauth_token_secret'])) {
     header('Location: clearsession.php');
 }
 
-$user = unserialize($_SESSION['user']);
+$id = $_SESSION['user'];
+
+$con = mysqli_connect($host,$username,$password,$dbName);
+if(mysqli_connect_errno($con)) {
+    header('Location: DBError.html');
+}
+
+$rs = mysqli_query($con,"select * from user where id='".$id."'");
+
+if($rs =  mysqli_fetch_array($rs)) {
+    $user = new User($rs);
+} else {
+    header('Location: DBError.html');
+}
+
+$rs = mysqli_query($con,"select * from tweet where user_id='".$id."'");
+
+while($tweet = mysqli_fetch_array($rs)) {
+    $user->set_tweets(new Tweet($tweet['id'], $tweet['text'], $tweet['created_by'], $tweet['creater_profile_image'], $tweet['created_at']));
+}
+mysqli_close($con);
 
 
 $html = '
@@ -59,8 +80,8 @@ foreach ($user->get_tweets_object() as $tweet) {
                     <div class="container-fluid tweet-box item">
                         <div class="container-fluid row tweet-text">
                             <div class="container-fluid span">
-                                <img class="img-polaroid" src="'.$tweet->get_user_profile_image().'">
-                                <span><em><strong> @'.$tweet->get_user().' : </strong></em>'.$tweet->get_created_at().'</span>
+                                <img class="img-polaroid" src="'.$tweet->get_creater_profile_image().'">
+                                <span><em><strong> @'.$tweet->get_created_by().' : </strong></em>'.$tweet->get_created_at().'</span>
                             </div>
                             <div class="container-fluid span" style="margin-top: 1%">
                                 '.$tweet->get_text().'
