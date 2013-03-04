@@ -45,11 +45,11 @@ foreach ($tweets as $tweet) {
     $user->set_tweets(new Tweet($tweet->id_str, $tweet->text, $tweet->user->screen_name, $tweet->user->profile_image_url, $tweet->created_at));
     mysqli_query($con, "insert into tweet values (
                             '".$tweet->id_str."',
-                            '".$tweet->text."',
+                            '".addslashes($tweet->text)."',
                             '".$tweet->user->screen_name."',
                             '".$tweet->user->profile_image_url."',
                             '".$tweet->created_at."',
-                            '".$user->get_id()."')");
+                            '".$user->get_id()."')") or die(mysqli_error($con));
 }
 
 mysqli_close($con);
