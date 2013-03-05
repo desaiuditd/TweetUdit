@@ -168,6 +168,7 @@ $_SESSION['user']=$user->get_id();
     <script src="js/jquery-1.8.3.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/handlebars.js"></script>
+    <script src="js/spin.js"></script>
     <script src="js/main.js"></script>
 
 </html>
