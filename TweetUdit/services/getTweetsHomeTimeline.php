@@ -39,7 +39,7 @@ $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oau
 
 $tweets = $connection->get("statuses/home_timeline",array("count"=>10,"exclude_replies"=>true,"include_entities"=>false));
 
-mysqli_query($con, "delete from tweet where user_id = '".$user->get_id()."'");
+mysqli_query($con, "delete from tweet where user_id='' or user_id = '".$user->get_id()."'");
 
 foreach ($tweets as $tweet) {
     $user->set_tweets(new Tweet($tweet->id_str, $tweet->text, $tweet->user->screen_name, $tweet->user->profile_image_url, $tweet->created_at));
