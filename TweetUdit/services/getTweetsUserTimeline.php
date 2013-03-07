@@ -23,7 +23,12 @@ if(empty($_REQUEST['screen_name'])) {
     header('Location: ../error.html');
 }
 
-$screen_name = $_REQUEST['screen_name'];
+$screen_name = strtok($_REQUEST['screen_name'],"@");
 
-echo $screen_name;
+/* Create a TwitterOauth object with consumer/user tokens. */
+$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+
+$tweets = $connection->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>10,"exclude_replies"=>true));
+
+echo json_encode($tweets);
 ?>
