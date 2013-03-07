@@ -110,12 +110,28 @@ $_SESSION['user']=$user->get_id();
             <div class="container-fluid row">
                 <div id="profile_pic" class="container-fluid span"></div>
                 <div id="wall" class="container-fluid span6">
-                    <h4 class="offset1">My Home Timeline</h4>
+                    <h4 class="offset">My Home Timeline</h4>
                     <div class="clearfix">&nbsp;</div>
                     <div class="clearfix">&nbsp;</div>
                 </div>
                 <div id="followers" class="container-fluid span">
                     <h5>Followers</h5>
+                    <div class="container-fluid">
+<?php
+$connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
+$followers = $connection->get("followers/ids",array("user_id"=>$user->get_id(),"count"=>10,"stringify_ids"=>true));
+
+foreach ($followers->ids as $follower) {
+    $temp = new User($connection->get("users/show",array("user_id"=>$follower,"includes_enntities"=>false)));
+?>
+                        <div class="container-fluid row">
+                            <img class="img-polaroid" src="<?echo $temp->get_profile_image_url()?>">
+                            <span><a class="follower" href="#">@<?$temp->get_screen_name()?></a></span>
+                        </div>
+<?php
+}
+?>
+                    </div>
                 </div>
             </div>
             <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
@@ -148,17 +164,6 @@ $_SESSION['user']=$user->get_id();
             </div>
             <a class="carousel-control left" href="#divTweets" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#divTweets" data-slide="next">&rsaquo;</a>
-        </div>
-    </script>
-
-    <script id="tmpltFollowers" type="text/handlebars-template">
-        <div class="container-fluid">
-            {{#each this}}
-                <div class="container-fluid row">
-                    <img class="img-polaroid" src="{{profile_image_url}}">
-                    <span><a class="follower" href="#">@{{screen_name}}</a></span>
-                </div>
-            {{/each}}
         </div>
     </script>
 
