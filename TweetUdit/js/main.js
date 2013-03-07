@@ -58,16 +58,9 @@ function init() {
                                     $("#wall h4").after(html);
                                     $("#divTweets").carousel("cycle");
 
-                                    $.post("services/getFollowers.php",function(data) {
-                                        var source = $("#tmpltFollowers").html();
-                                        var template = Handlebars.compile(source);
-                                        var html = template(data);
-                                        $("#followers").append(html);
+                                    $("#wall #divTweets").after('<div class="container-fluid pull-right"><a href="downloadTweets.php" class="btn btn-primary">Download Tweets</a></div>');
 
-                                        $("#wall #divTweets").after('<div class="container-fluid pull-right"><a href="downloadTweets.php" class="btn btn-primary">Download Tweets</a></div>');
-
-                                        flag = true;
-                                    },"json");
+                                    flag = true;
                                 },"json");
                             },"json");
                         },"json");
