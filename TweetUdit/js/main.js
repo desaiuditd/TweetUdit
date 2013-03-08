@@ -74,17 +74,15 @@ function init() {
 $(document).ready(function() {
 
     var spinner = new Spinner(opts).spin(document.body);
-
-    init();
-
     function stopSpinner() {
         if(flag==true) {
             spinner.stop();
             clearInterval(interval);
         }
     }
-
     var interval = setInterval(stopSpinner, 3000);
+
+    init();
 
     $(document).on("click",".follower",function(e) {
         $.post("services/getTweetsUserTimeline.php",{screen_name : $(this).html()},function(data){
