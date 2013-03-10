@@ -19,7 +19,9 @@ var opts = {
   top: '100', // Top position relative to parent in px
   left: 'auto' // Left position relative to parent in px
 };
+var spinner = new Spinner(opts);
 var flag=false;
+var interval=0;
 
 function init() {
 
@@ -71,22 +73,52 @@ function init() {
     } catch(e) { console.log(e.message); }
 }
 
+function spinnerStopAPI() {
+    spinner.stop();
+}
+function stopSpinner() {
+    if(flag==true) {
+        setTimeout(spinnerStopAPI, 5000);
+    } else setTimeout(stopSpinner, 3000);
+}
+
 $(document).ready(function() {
 
-    var spinner = new Spinner(opts).spin(document.body);
-    function stopSpinner() {
-        if(flag==true) {
-            spinner.stop();
-            clearInterval(interval);
-        }
-    }
-    var interval = setInterval(stopSpinner, 3000);
+    spinner.spin(document.body);
+    flag = false;
+    setTimeout(stopSpinner, 3000);
 
     init();
 
     $(document).on("click",".follower",function(e) {
-        $.post("services/getTweetsUserTimeline.php",{screen_name : $(this).html()},function(data){
-            alert(data);
+
+        spinner.spin(document.body);
+        flag = false;
+        setTimeout(stopSpinner, 3000);
+
+        var screenName = $(this).html();
+        $.post("services/getTweetsUserTimeline.php",{screen_name : screenName},function(data) {
+            console.log(data);
+            var source = $("#tmpltHeader").html();
+            var template = Handlebars.compile(source);
+            var html = template({user : screenName});
+            $("#wall").html(html);
+
+            source = $("#tmpltTweets").html();
+            template = Handlebars.compile(source);
+            html = template(data);
+            $("#wall").append(html);
+            $("#divTweets").carousel("cycle");
+            flag = true;
         },"json");
+    });
+
+    $("#typehead").typehead({
+        source : function (query,process) {
+                    return $.post("services/getFollowers.php",{ query : query },function(data) {
+                        return process(data);
+                    });
+                },
+        items : 5
     });
 });

@@ -108,11 +108,19 @@ $_SESSION['user']=$user->get_id();
 
         <div class="container">
             <div class="container-fluid row">
-                <div id="profile_pic" class="container-fluid span"></div>
-                <div id="wall" class="container-fluid span6">
-                    <h4 class="offset">My Home Timeline</h4>
+                <div class="container-fluid span">
+                    <div id="profile_pic" class="container-fluid span"></div>
+                    <div id="wall" class="container-fluid span6">
+                        <h4 class="offset">My Home Timeline</h4>
+                        <div class="clearfix">&nbsp;</div>
+                        <div class="clearfix">&nbsp;</div>
+                    </div>
                     <div class="clearfix">&nbsp;</div>
                     <div class="clearfix">&nbsp;</div>
+                    <div id="search" class="input-prepend offset1 span5">
+                        <span class="add-on">@</span>
+                        <input id="typehead" class="input-block-level" type="text" data-provide="typehead" autocomplete="off">
+                    </div>
                 </div>
                 <div id="followers" class="container-fluid span">
                     <h5>Followers</h5>
@@ -147,6 +155,10 @@ foreach ($followers->users as $follower) {
         </div>
     </body>
 
+    <script id="tmpltHeader" type="text/x-handlebars-template">
+        <h4 class="offset">{{user}}'s Timeline</h4>
+    </script>
+
     <script id="tmpltTweets" type="text/x-handlebars-template">
         <div id="divTweets" class="carousel slide">
             <div class="carousel-inner">
@@ -155,8 +167,14 @@ foreach ($followers->users as $follower) {
 
                         <div class="container-fluid row tweet-text">
                             <div class="container-fluid span">
-                                <img class="img-polaroid" src="{{creater_profile_image}}">
-                                <span><em><strong> @{{created_by}} : </strong></em>{{created_at}}</span>
+                                {{#if creater_profile_image}}
+                                    <img class="img-polaroid" src="{{creater_profile_image}}">
+                                    <span><em><strong> @{{created_by}} : </strong></em>{{created_at}}</span>
+                                {{/if}}
+                                {{#if user.profile_image_url}}
+                                    <img class="img-polaroid" src="{{user.profile_image_url}}">
+                                    <span><em><strong> @{{user.screen_name}} : </strong></em>{{created_at}}</span>
+                                {{/if}}
                             </div>
                             <div class="container-fluid span" style="margin-top: 1%">
                                 {{text}}
