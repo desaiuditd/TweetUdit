@@ -139,7 +139,6 @@ foreach ($followers->users as $follower) {
                         </div>
 <?php
     $i++;
-
 }
 ?>
                     </div>
