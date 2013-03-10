@@ -30,5 +30,5 @@ $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oau
 
 $tweets = $connection->get("statuses/user_timeline",array("screen_name"=>$screen_name,"count"=>10,"exclude_replies"=>true));
 
-echo json_encode($tweets);
+echo json_encode(array_slice($tweets, 0, 10));
 ?>
