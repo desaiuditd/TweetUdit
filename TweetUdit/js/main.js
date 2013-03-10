@@ -70,7 +70,7 @@ function init() {
                 },"json");
             },"json");
         },"json");
-    } catch(e) { console.log(e.message); }
+    } catch(e) { alert(e.message); }
 }
 
 function spinnerStopAPI() {
@@ -78,7 +78,7 @@ function spinnerStopAPI() {
 }
 function stopSpinner() {
     if(flag==true) {
-        setTimeout(spinnerStopAPI, 5000);
+        setTimeout(spinnerStopAPI, 3000);
     } else setTimeout(stopSpinner, 3000);
 }
 
@@ -98,7 +98,7 @@ $(document).ready(function() {
 
         var screenName = $(this).html();
         $.post("services/getTweetsUserTimeline.php",{screen_name : screenName},function(data) {
-            console.log(data);
+
             var source = $("#tmpltHeader").html();
             var template = Handlebars.compile(source);
             var html = template({user : screenName});
@@ -115,9 +115,35 @@ $(document).ready(function() {
 
     $("#typeahead").typeahead({
         source : function (query,process) {
-                    return $.post("services/getFollowers.php",{ query : query },function(data) {
-                        return process(data);
+                    spinner.spin(document.body);
+                    flag = false;
+                    setTimeout(stopSpinner, 3000);
+                    $.post("services/getFollowers.php",{ query : query },function(data) {
+                        process($.parseJSON(data));
+                        flag = true;
                     });
+                },
+        minLength : 4,
+        updater : function(item) {
+                    spinner.spin(document.body);
+                    flag = false;
+                    setTimeout(stopSpinner, 3000);
+
+                    var screenName = "@"+item;
+                    $.post("services/getTweetsUserTimeline.php",{screen_name : screenName},function(data) {
+                        var source = $("#tmpltHeader").html();
+                        var template = Handlebars.compile(source);
+                        var html = template({user : screenName});
+                        $("#wall").html(html);
+
+                        source = $("#tmpltTweets").html();
+                        template = Handlebars.compile(source);
+                        html = template(data);
+                        $("#wall").append(html);
+                        $("#divTweets").carousel("cycle");
+                        flag = true;
+                    },"json");
+                    return item;
                 }
     });
 });
