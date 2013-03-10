@@ -45,8 +45,7 @@ $followers = $connection->get("followers/list",array("user_id"=>$user->get_id(),
 $data = array();
 
 foreach ($followers->users as $follower) {
-    echo stripos($follower->screen_name,$query);
-    if(stripos($follower->screen_name,$query)==0) {
+    if(stripos($follower->screen_name,$query)===0) {
         $data[] = $follower->screen_name;
     }
 }
