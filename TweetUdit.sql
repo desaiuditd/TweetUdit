@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2013 at 12:25 PM
+-- Generation Time: Mar 10, 2013 at 01:06 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `tweet` (
   `created_at` varchar(32) NOT NULL,
   `user_id` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -53,9 +53,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `profile_sidebar_fill_color` varchar(32) NOT NULL,
   `profile_background_color` varchar(32) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `screen_name` (`screen_name`),
-  UNIQUE KEY `screen_name_2` (`screen_name`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  UNIQUE KEY `screen_name` (`screen_name`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
