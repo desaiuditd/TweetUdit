@@ -113,12 +113,11 @@ $(document).ready(function() {
         },"json");
     });
 
-    $("#typehead").typehead({
+    $("#typeahead").typeahead({
         source : function (query,process) {
                     return $.post("services/getFollowers.php",{ query : query },function(data) {
                         return process(data);
                     });
-                },
-        items : 5
+                }
     });
 });
