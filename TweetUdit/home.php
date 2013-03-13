@@ -164,26 +164,32 @@ foreach ($followers->users as $follower) {
     <script id="tmpltTweets" type="text/x-handlebars-template">
         <div id="divTweets" class="carousel slide">
             <div class="carousel-inner">
-                {{#each this}}
-                    <div class="container-fluid tweet-box item">
+                {{#if this}}
+                    {{#each this}}
+                        <div class="container-fluid tweet-box item">
 
-                        <div class="container-fluid row">
-                            <div class="container-fluid span">
-                                {{#if creater_profile_image}}
-                                    <img class="img-polaroid" src="{{creater_profile_image}}">
-                                    <span><em><strong> @{{created_by}} : </strong></em>{{created_at}}</span>
-                                {{/if}}
-                                {{#if user.profile_image_url}}
-                                    <img class="img-polaroid" src="{{user.profile_image_url}}">
-                                    <span><em><strong> @{{user.screen_name}} : </strong></em>{{created_at}}</span>
-                                {{/if}}
-                            </div>
-                            <div class="container-fluid span" style="margin-top: 1%">
-                                {{text}}
+                            <div class="container-fluid row">
+                                <div class="container-fluid span">
+                                    {{#if creater_profile_image}}
+                                        <img class="img-polaroid" src="{{creater_profile_image}}">
+                                        <span><em><strong> @{{created_by}} : </strong></em>{{created_at}}</span>
+                                    {{/if}}
+                                    {{#if user.profile_image_url}}
+                                        <img class="img-polaroid" src="{{user.profile_image_url}}">
+                                        <span><em><strong> @{{user.screen_name}} : </strong></em>{{created_at}}</span>
+                                    {{/if}}
+                                </div>
+                                <div class="container-fluid span" style="margin-top: 1%">
+                                    {{text}}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                {{/each}}
+                    {{/each}}
+                {{else}}
+                        <div class="container-fluid tweet-box item">
+                            Oops ... No Tweets !!!
+                        </div>
+                {{/if}}
             </div>
             <a class="carousel-control left" href="#divTweets" data-slide="prev">&lsaquo;</a>
             <a class="carousel-control right" href="#divTweets" data-slide="next">&rsaquo;</a>
