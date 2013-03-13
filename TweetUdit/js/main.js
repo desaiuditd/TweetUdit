@@ -41,12 +41,8 @@ function init() {
                         $("#footer").css("background-color","#"+data.bgColor);
 
                         $.post("services/getSidebarColor.php",function(data) {
-                            $("#wall,#followers").css("background-image","-moz-linear-gradient(top, #"+data.sbColor+", #FEFEFE)");
-                            $("#wall,#followers").css("background-image","-webkit-gradient(linear, 0 0, 0 100%, to(#"+data.sbColor+"), from(#FEFEFE))");
-                            $("#wall,#followers").css("background-image","-webkit-linear-gradient(top, #"+data.sbColor+", #FEFEFE)");
-                            $("#wall,#followers").css("background-image","-o-linear-gradient(top, #"+data.sbColor+", #FEFEFE)");
-                            $("#wall,#followers").css("background-image","linear-gradient(to bottom, #"+data.sbColor+", #FEFEFE)");
-                            $("#wall,#followers").css("background-repeat","repeat-x");
+
+                            $("#wall,#followers").css("background-color","#"+data.sbColor);
 
                             $.post("services/getBackgroundImageURL.php",function(data) {
                                 $("body").css("background-image","url('"+data.bgImageURL+"')");
