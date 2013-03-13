@@ -8,18 +8,14 @@
 
 #wall,#followers {
     border-radius: 0.5em;
-    opacity: 0.6;
-    filter: alpha(60);
 }
 
 .tweet-box {
     border-radius: 0.5em;
-    background-image: -moz-linear-gradient(top, #FEFEFE, #FFFFFF);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#FEFEFE), to(#FFFFFF));
-    background-image: -webkit-linear-gradient(top, #FEFEFE, #FFFFFF);
-    background-image: -o-linear-gradient(top, #FEFEFE, #FFFFFF);
-    background-image: linear-gradient(to bottom, #FEFEFE, #FFFFFF);
-    background-repeat: repeat-x;
-    margin: 10%;
+    background-color: #fefefe;
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-bottom: 2%;
+    margin-top: 2%;
     padding: 1%;
 }
