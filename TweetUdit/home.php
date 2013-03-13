@@ -180,7 +180,7 @@ foreach ($followers->users as $follower) {
                                     {{/if}}
                                 </div>
                                 <div class="container-fluid span" style="margin-top: 1%">
-                                    {{text}}
+                                    {{{text}}}
                                 </div>
                             </div>
                         </div>
