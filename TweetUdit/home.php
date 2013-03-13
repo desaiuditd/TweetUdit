@@ -111,7 +111,7 @@ $_SESSION['user']=$user->get_id();
                 <div class="container-fluid span">
                     <div id="profile_pic" class="container-fluid span"></div>
                     <div id="wall" class="container-fluid span6">
-                        <h4 class="offset">My Home Timeline</h4>
+                        <h4 class="offset tweet-box">My Home Timeline</h4>
                         <div class="clearfix">&nbsp;</div>
                         <div class="clearfix">&nbsp;</div>
                     </div>
@@ -123,17 +123,18 @@ $_SESSION['user']=$user->get_id();
                     </div>
                 </div>
                 <div id="followers" class="container-fluid span">
-                    <h5>Followers</h5>
-                    <div class="container-fluid">
+                    <h5 class="offset tweet-box">Followers</h5>
+                    <div class="container-fluid tweet-box" style="margin-left: 2%; margin-right: 2%">
 <?php
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 $followers = $connection->get("followers/list",array("user_id"=>$user->get_id(),"skip_status "=>true,"include_user_entities ",false));
 
+//echo"<pre>";print_r($followers);echo"</pre>";
 $i=0;
 foreach ($followers->users as $follower) {
     if($i>=10) { break; }
 ?>
-                        <div class="container-fluid row">
+                        <div class="container-fluid row" style="margin-left: 0%; margin-right: 0%;">
                             <img class="img-polaroid" src="<?echo $follower->profile_image_url;?>">
                             <span><a class="follower" href="#">@<?echo $follower->screen_name;?></a></span>
                         </div>
@@ -164,7 +165,7 @@ foreach ($followers->users as $follower) {
                 {{#each this}}
                     <div class="container-fluid tweet-box item">
 
-                        <div class="container-fluid row tweet-text">
+                        <div class="container-fluid row">
                             <div class="container-fluid span">
                                 {{#if creater_profile_image}}
                                     <img class="img-polaroid" src="{{creater_profile_image}}">
