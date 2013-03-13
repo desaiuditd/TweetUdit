@@ -41,7 +41,8 @@ if($rs =  mysqli_fetch_array($rs)) {
                             profile_image_url = '".$user->get_profile_image_url()."',
                             profile_background_image_url = '".$user->get_profile_background_image_url()."',
                             profile_sidebar_fill_color = '".$user->get_profile_sidebar_fill_color()."',
-                            profile_background_color = '".$user->get_profile_background_color()."'
+                            profile_background_color = '".$user->get_profile_background_color()."',
+                            profile_link_color = '".$user->get_profile_link_color()."'
                         where id = '".$user->get_id()."'");
 } else {
 
@@ -52,7 +53,8 @@ if($rs =  mysqli_fetch_array($rs)) {
                             '".$user->get_profile_image_url()."',
                             '".$user->get_profile_background_image_url()."',
                             '".$user->get_profile_sidebar_fill_color()."',
-                            '".$user->get_profile_background_color()."')");
+                            '".$user->get_profile_background_color()."',
+                            '".$user->get_profile_link_color()."')");
 }
 
 mysqli_close($con);
@@ -156,7 +158,7 @@ foreach ($followers->users as $follower) {
     </body>
 
     <script id="tmpltHeader" type="text/x-handlebars-template">
-        <h4 class="offset">{{user}}'s Timeline</h4>
+        <h4 class="offset tweet-box">{{user}}'s Timeline</h4>
     </script>
 
     <script id="tmpltTweets" type="text/x-handlebars-template">

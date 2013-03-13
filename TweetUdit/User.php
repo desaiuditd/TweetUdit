@@ -14,6 +14,7 @@ class User {
     private $profile_background_image_url;
     private $profile_sidebar_fill_color;
     private $profile_background_color;
+    private $profile_link_color;
 
     private $tweets = array();
 
@@ -27,6 +28,7 @@ class User {
             $this->set_profile_background_image_url($details->profile_background_image_url);
             $this->set_profile_sidebar_fill_color($details->profile_sidebar_fill_color);
             $this->set_profile_background_color($details->profile_background_color);
+            $this->set_profile_link_color($details->profile_link_color);
         } else {
             $this->set_id($details['id']);
             $this->set_screen_name($details['screen_name']);
@@ -35,6 +37,7 @@ class User {
             $this->set_profile_background_image_url($details['profile_background_image_url']);
             $this->set_profile_sidebar_fill_color($details['profile_sidebar_fill_color']);
             $this->set_profile_background_color($details['profile_background_color']);
+            $this->set_profile_link_color($details['profile_link_color']);
         }
     }
 
@@ -94,6 +97,13 @@ class User {
         $this->profile_background_color = $profile_background_color;
     }
 
+    public function get_profile_link_color() {
+        return $this->profile_link_color;
+    }
+
+    public function set_profile_link_color($profile_link_color) {
+        $this->profile_link_color = $profile_link_color;
+    }
 
     public function get_tweets_json() {
 

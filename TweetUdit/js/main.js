@@ -36,29 +36,32 @@ function init() {
                 $.post("services/getProfileImageURL.php",function(data) {
                     $("#profile_pic").append("<a href='home.php'><img class='img-polaroid' src='"+data.profileImageURL+"'></a>");
 
-                    $.post("services/getBackgroundColor.php",function(data) {
-                        $("body").css("background-color","#"+data.bgColor);
-                        $("#footer").css("background-color","#"+data.bgColor);
+                    $.post("services/getLinkColor.php",function(data) {
+                        $(".follower").css("color", "#"+data.linkColor);
 
-                        $.post("services/getSidebarColor.php",function(data) {
+                        $.post("services/getBackgroundColor.php",function(data) {
+                            $("body").css("background-color","#"+data.bgColor);
+                            $("#footer").css("background-color","#"+data.bgColor);
 
-                            $("#wall,#followers").css("background-color","#"+data.sbColor);
+                            $.post("services/getSidebarColor.php",function(data) {
+                                $("#wall,#followers").css("background-color","#"+data.sbColor);
 
-                            $.post("services/getBackgroundImageURL.php",function(data) {
-                                $("body").css("background-image","url('"+data.bgImageURL+"')");
-                                $("body").css("background-repeat","no-repeat");
-                                $("body").css("background-position","0% -15%");
+                                $.post("services/getBackgroundImageURL.php",function(data) {
+                                    $("body").css("background-image","url('"+data.bgImageURL+"')");
+                                    $("body").css("background-repeat","no-repeat");
+                                    $("body").css("background-position","0% -15%");
 
-                                $.post("services/getTweetsHomeTimeline.php",function(data) {
-                                    var source = $("#tmpltTweets").html();
-                                    var template = Handlebars.compile(source);
-                                    var html = template(data);
-                                    $("#wall h4").after(html);
-                                    $("#divTweets").carousel("cycle");
+                                    $.post("services/getTweetsHomeTimeline.php",function(data) {
+                                        var source = $("#tmpltTweets").html();
+                                        var template = Handlebars.compile(source);
+                                        var html = template(data);
+                                        $("#wall h4").after(html);
+                                        $("#divTweets").carousel("cycle");
 
-                                    $("#wall #divTweets").after('<div class="container-fluid pull-right"><a href="downloadTweets.php" class="btn btn-primary">Download Tweets</a></div>');
+                                        $("#wall #divTweets").after('<div class="container-fluid pull-right"><a href="downloadTweets.php" class="btn btn-primary">Download Tweets</a></div>');
 
-                                    flag = true;
+                                        flag = true;
+                                    },"json");
                                 },"json");
                             },"json");
                         },"json");
@@ -66,7 +69,7 @@ function init() {
                 },"json");
             },"json");
         },"json");
-    } catch(e) { alert(e.message); }
+    } catch(e) {alert(e.message);}
 }
 
 function spinnerStopAPI() {
@@ -114,7 +117,7 @@ $(document).ready(function() {
                     spinner.spin(document.body);
                     flag = false;
                     setTimeout(stopSpinner, 3000);
-                    $.post("services/getFollowers.php",{ query : query },function(data) {
+                    $.post("services/getFollowers.php",{query : query},function(data) {
                         process($.parseJSON(data));
                         flag = true;
                     });
