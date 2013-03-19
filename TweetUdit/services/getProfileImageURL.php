@@ -12,11 +12,21 @@ if (empty($_SESSION['access_token']) || empty($_SESSION['access_token']['oauth_t
     header('Location: ../clearsession.php');
 }
 
-$id = $_SESSION['user'];
-
 $con = mysqli_connect($host,$username,$password,$dbName);
 if(mysqli_connect_errno($con)) {
     header('Location: ../DBError.html');
+}
+
+if(empty($_REQUEST['screenName']))
+    $id = $_SESSION['user'];
+else {
+    $rs = mysqli_query($con,"select * from user where screen_name='".strtok($_REQUEST['screenName'],"@")."'");
+
+    if($rs =  mysqli_fetch_array($rs)) {
+        $id = $rs['id'];
+    } else {
+        header('Location: DBError.html');
+    }
 }
 
 $rs = mysqli_query($con,"select * from user where id='".$id."'");
