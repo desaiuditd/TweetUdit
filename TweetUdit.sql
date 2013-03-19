@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Mar 10, 2013 at 01:06 PM
+-- Generation Time: Mar 13, 2013 at 09:46 PM
 -- Server version: 5.5.27
 -- PHP Version: 5.4.7
 
@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `user` (
   `profile_background_image_url` varchar(256) NOT NULL,
   `profile_sidebar_fill_color` varchar(32) NOT NULL,
   `profile_background_color` varchar(32) NOT NULL,
+  `profile_link_color` varchar(32) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `screen_name` (`screen_name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
