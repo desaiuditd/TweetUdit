@@ -20,8 +20,8 @@ var opts = {
   left: 'auto' // Left position relative to parent in px
 };
 var spinner = new Spinner(opts);
-var flag=false;
-var interval=0;
+var flag = false;
+var interval = 0;
 
 function init() {
 
@@ -57,8 +57,6 @@ function init() {
                                         var html = template(data);
                                         $("#wall h4").after(html);
                                         $("#divTweets").carousel("cycle");
-
-                                        $("#wall #divTweets").after('<div class="container-fluid pull-right"><a href="downloadTweets.php" class="btn btn-primary">Download Tweets</a></div>');
 
                                         flag = true;
                                     },"json");
@@ -96,19 +94,49 @@ $(document).ready(function() {
         setTimeout(stopSpinner, 3000);
 
         var screenName = $(this).html();
+
         $.post("services/getTweetsUserTimeline.php",{screen_name : screenName},function(data) {
 
             var source = $("#tmpltHeader").html();
             var template = Handlebars.compile(source);
             var html = template({user : screenName});
-            $("#wall").html(html);
+            $("#wall h4").remove();
+            $("#wall").prepend(html);
 
             source = $("#tmpltTweets").html();
             template = Handlebars.compile(source);
             html = template(data);
-            $("#wall").append(html);
+            $("#divTweets").remove();
+            $("#wall h4").after(html);
             $("#divTweets").carousel("cycle");
-            flag = true;
+
+            $("a[href='downloadTweets.php']").attr("href","downloadTweets.php?follower="+screenName);
+
+            $.post("services/getProfileImageURL.php",{screenName : screenName},function(data) {
+                $("#profile_pic a img").attr("src",data.profileImageURL);
+                $("#profile_pic a").attr("href","#");
+
+                $.post("services/getLinkColor.php",{screenName : screenName},function(data) {
+                    $(".follower").css("color", "#"+data.linkColor);
+
+                    $.post("services/getBackgroundColor.php",{screenName : screenName},function(data) {
+                        $("body").css("background-color","#"+data.bgColor);
+                        $("#footer").css("background-color","#"+data.bgColor);
+
+                        $.post("services/getSidebarColor.php",{screenName : screenName},function(data) {
+                            $("#wall,#followers").css("background-color","#"+data.sbColor);
+
+                            $.post("services/getBackgroundImageURL.php",{screenName : screenName},function(data) {
+                                $("body").css("background-image","url('"+data.bgImageURL+"')");
+                                $("body").css("background-repeat","no-repeat");
+                                $("body").css("background-position","0% -15%");
+
+                                flag = true;
+                            },"json");
+                        },"json");
+                    },"json");
+                },"json");
+            },"json");
         },"json");
     });
 
