@@ -120,9 +120,8 @@ $_SESSION['user']=$user->get_id();
                     </div>
                     <div class="clearfix">&nbsp;</div>
                     <div class="clearfix">&nbsp;</div>
-                    <div id="search" class="input-prepend">
+                    <div id="search">
                         <input id="typeahead" class="span6 pull-right" type="text" placeholder="Search Followers ... (Minimum 4 Characters)" data-provide="typeahead" autocomplete="off">
-                        <span class="add-on pull-right">@</span>
                     </div>
                 </div>
                 <div id="followers" class="container-fluid span">

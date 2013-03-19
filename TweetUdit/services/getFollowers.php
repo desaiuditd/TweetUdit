@@ -45,10 +45,13 @@ $followers = $connection->get("followers/list",array("user_id"=>$user->get_id(),
 $data = array();
 
 foreach ($followers->users as $follower) {
-    if(stripos($follower->screen_name,$query)===0) {
-        $data[] = $follower->screen_name;
+    if(stristr($follower->screen_name,$query)!=false) {
+        $data[] = "@".$follower->screen_name;
+    }
+    if(stristr(strtolower($follower->name),strtolower($query))!=false) {
+        $data[] = $follower->name;
     }
 }
-
+sort($data);
 echo json_encode($data);
 ?>

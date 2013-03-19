@@ -156,7 +156,7 @@ $(document).ready(function() {
                     flag = false;
                     setTimeout(stopSpinner, 3000);
 
-                    var screenName = "@"+item;
+                    var screenName = item;
                     $.post("services/getTweetsUserTimeline.php",{screen_name : screenName},function(data) {
                         var source = $("#tmpltHeader").html();
                         var template = Handlebars.compile(source);
