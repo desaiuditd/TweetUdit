@@ -114,6 +114,7 @@ $_SESSION['user']=$user->get_id();
                     <div id="profile_pic" class="container-fluid span"></div>
                     <div id="wall" class="container-fluid span6">
                         <h4 class="offset tweet-box">My Home Timeline</h4>
+                        <div class="container-fluid pull-right"><a href="downloadTweets.php" class="btn btn-primary">Download Tweets</a></div>
                         <div class="clearfix">&nbsp;</div>
                         <div class="clearfix">&nbsp;</div>
                     </div>
