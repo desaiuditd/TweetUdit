@@ -111,10 +111,12 @@ $_SESSION['user']=$user->get_id();
         <div class="container">
             <div class="container-fluid row">
                 <div class="container-fluid span">
-                    <div id="profile_pic" class="container-fluid span"></div>
+                    <div id="profile_pic" class="container-fluid span">
+                        <a href='home.php'><img class='img-polaroid' src=""></a>
+                    </div>
                     <div id="wall" class="container-fluid span6">
                         <h4 class="offset tweet-box">My Home Timeline</h4>
-                        <div class="container-fluid pull-right"><a href="downloadTweets.php" class="btn btn-primary">Download Tweets</a></div>
+                        <div class="container-fluid pull-right"><a id="aDownloadTweets" href="downloadTweets.php" class="btn btn-primary">Download Tweets</a></div>
                         <div class="clearfix">&nbsp;</div>
                         <div class="clearfix">&nbsp;</div>
                     </div>

@@ -23,7 +23,12 @@ if(mysqli_connect_errno($con)) {
 if(empty($_REQUEST['follower']))
     $id = $_SESSION['user'];
 else {
-    $rs = mysqli_query($con,"select * from user where screen_name='".strtok($_REQUEST['follower'],"@")."'");
+
+    if(stripos($_REQUEST['follower'],"@")===0) {
+        $rs = mysqli_query($con,"select * from user where screen_name='".strtok($_REQUEST['follower'],"@")."'");
+    } else {
+        $rs = mysqli_query($con,"select * from user where name='".$_REQUEST['follower']."'");
+    }
 
     if($rs =  mysqli_fetch_array($rs)) {
         $id = $rs['id'];
