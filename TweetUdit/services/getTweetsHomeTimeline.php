@@ -53,6 +53,6 @@ foreach ($tweets as $tweet) {
 }
 
 mysqli_close($con);
-$_SESSION['user']=  $user->get_id();
+
 echo $user->get_tweets_json();
 ?>
