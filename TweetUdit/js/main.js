@@ -56,9 +56,7 @@ function updatePage(name) {
     } else {
 
         $.post("services/getProfileImageURL.php",{screenName:name},function(data) {
-            console.log($("#profile_pic a img").attr("src"));
             $("#profile_pic a img").attr("src",data.profileImageURL);
-            console.log($("#profile_pic a img").attr("src"));
 
             $.post("services/getLinkColor.php",{screenName:name},function(data) {
                 $(".follower").css("color", "#"+data.linkColor);

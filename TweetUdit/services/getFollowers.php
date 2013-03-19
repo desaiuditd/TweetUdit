@@ -45,6 +45,34 @@ $followers = $connection->get("followers/list",array("user_id"=>$user->get_id(),
 $data = array();
 
 foreach ($followers->users as $follower) {
+
+    $rs = mysqli_query($con,"select id from user where id='".$follower->id_str."'");
+
+    if($rs =  mysqli_fetch_array($rs)) {
+
+        mysqli_query($con, "update user
+                                set id = '".$follower->id_str."',
+                                screen_name = '".$follower->screen_name."',
+                                name = '".$follower->name."',
+                                profile_image_url = '".$follower->profile_image_url."',
+                                profile_background_image_url = '".$follower->profile_background_image_url."',
+                                profile_sidebar_fill_color = '".$follower->profile_sidebar_fill_color."',
+                                profile_background_color = '".$follower->profile_background_color."',
+                                profile_link_color = '".$follower->profile_link_color."'
+                            where id = '".$follower->id_str."'");
+    } else {
+
+        mysqli_query($con, "insert into user values (
+                                '".$follower->id_str."',
+                                '".$follower->screen_name."',
+                                '".$follower->name."',
+                                '".$follower->profile_image_url."',
+                                '".$follower->profile_background_image_url."',
+                                '".$follower->profile_sidebar_fill_color."',
+                                '".$follower->profile_background_color."',
+                                '".$follower->profile_link_color."')");
+    }
+
     if(stristr($follower->screen_name,$query)!=false) {
         $data[] = "@".$follower->screen_name;
     }
