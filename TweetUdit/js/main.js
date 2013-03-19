@@ -23,6 +23,67 @@ var spinner = new Spinner(opts);
 var flag = false;
 var interval = 0;
 
+function updatePage(name) {
+
+    if(name===null) {
+
+        $.post("services/getProfileImageURL.php",function(data) {
+            console.log($("#profile_pic a img").attr("src"));
+            $("#profile_pic a img").attr("src",data.profileImageURL);
+            console.log($("#profile_pic a img").attr("src"));
+
+            $.post("services/getLinkColor.php",function(data) {
+                $(".follower").css("color", "#"+data.linkColor);
+
+                $.post("services/getBackgroundColor.php",function(data) {
+                    $("body").css("background-color","#"+data.bgColor);
+                    $("#footer").css("background-color","#"+data.bgColor);
+
+                    $.post("services/getSidebarColor.php",function(data) {
+                        $("#wall,#followers").css("background-color","#"+data.sbColor);
+
+                        $.post("services/getBackgroundImageURL.php",function(data) {
+                            $("body").css("background-image","url('"+data.bgImageURL+"')");
+                            $("body").css("background-repeat","no-repeat");
+                            $("body").css("background-position","0% -15%");
+
+                            flag = true;
+                        },"json");
+                    },"json");
+                },"json");
+            },"json");
+        },"json");
+    } else {
+
+        $.post("services/getProfileImageURL.php",{screenName:name},function(data) {
+            console.log($("#profile_pic a img").attr("src"));
+            $("#profile_pic a img").attr("src",data.profileImageURL);
+            console.log($("#profile_pic a img").attr("src"));
+
+            $.post("services/getLinkColor.php",{screenName:name},function(data) {
+                $(".follower").css("color", "#"+data.linkColor);
+
+                $.post("services/getBackgroundColor.php",{screenName:name},function(data) {
+                    $("body").css("background-color","#"+data.bgColor);
+                    $("#footer").css("background-color","#"+data.bgColor);
+
+                    $.post("services/getSidebarColor.php",{screenName:name},function(data) {
+                        $("#wall,#followers").css("background-color","#"+data.sbColor);
+
+                        $.post("services/getBackgroundImageURL.php",{screenName:name},function(data) {
+                            $("body").css("background-image","url('"+data.bgImageURL+"')");
+                            $("body").css("background-repeat","no-repeat");
+                            $("body").css("background-position","0% -15%");
+
+                            flag = true;
+                        },"json");
+                    },"json");
+                },"json");
+            },"json");
+        },"json");
+    }
+}
+
 function init() {
 
     try {
@@ -33,37 +94,14 @@ function init() {
             $.post("services/getScreenName.php",function(data) {
                 $("#liScreenName").html("&nbsp;<strong><em><a href='home.php'>(@"+data.screenName+")</a></em></strong>");
 
-                $.post("services/getProfileImageURL.php",function(data) {
-                    $("#profile_pic").append("<a href='home.php'><img class='img-polaroid' src='"+data.profileImageURL+"'></a>");
+                $.post("services/getTweetsHomeTimeline.php",function(data) {
+                    var source = $("#tmpltTweets").html();
+                    var template = Handlebars.compile(source);
+                    var html = template(data);
+                    $("#wall h4").after(html);
+                    $("#divTweets").carousel("cycle");
 
-                    $.post("services/getLinkColor.php",function(data) {
-                        $(".follower").css("color", "#"+data.linkColor);
-
-                        $.post("services/getBackgroundColor.php",function(data) {
-                            $("body").css("background-color","#"+data.bgColor);
-                            $("#footer").css("background-color","#"+data.bgColor);
-
-                            $.post("services/getSidebarColor.php",function(data) {
-                                $("#wall,#followers").css("background-color","#"+data.sbColor);
-
-                                $.post("services/getBackgroundImageURL.php",function(data) {
-                                    $("body").css("background-image","url('"+data.bgImageURL+"')");
-                                    $("body").css("background-repeat","no-repeat");
-                                    $("body").css("background-position","0% -15%");
-
-                                    $.post("services/getTweetsHomeTimeline.php",function(data) {
-                                        var source = $("#tmpltTweets").html();
-                                        var template = Handlebars.compile(source);
-                                        var html = template(data);
-                                        $("#wall h4").after(html);
-                                        $("#divTweets").carousel("cycle");
-
-                                        flag = true;
-                                    },"json");
-                                },"json");
-                            },"json");
-                        },"json");
-                    },"json");
+                    updatePage(null,true);
                 },"json");
             },"json");
         },"json");
@@ -110,33 +148,9 @@ $(document).ready(function() {
             $("#wall h4").after(html);
             $("#divTweets").carousel("cycle");
 
-            $("a[href='downloadTweets.php']").attr("href","downloadTweets.php?follower="+screenName);
+            $("#aDownloadTweets").attr("href","downloadTweets.php?follower="+screenName);
 
-            $.post("services/getProfileImageURL.php",{screenName : screenName},function(data) {
-                $("#profile_pic a img").attr("src",data.profileImageURL);
-                $("#profile_pic a").attr("href","#");
-
-                $.post("services/getLinkColor.php",{screenName : screenName},function(data) {
-                    $(".follower").css("color", "#"+data.linkColor);
-
-                    $.post("services/getBackgroundColor.php",{screenName : screenName},function(data) {
-                        $("body").css("background-color","#"+data.bgColor);
-                        $("#footer").css("background-color","#"+data.bgColor);
-
-                        $.post("services/getSidebarColor.php",{screenName : screenName},function(data) {
-                            $("#wall,#followers").css("background-color","#"+data.sbColor);
-
-                            $.post("services/getBackgroundImageURL.php",{screenName : screenName},function(data) {
-                                $("body").css("background-image","url('"+data.bgImageURL+"')");
-                                $("body").css("background-repeat","no-repeat");
-                                $("body").css("background-position","0% -15%");
-
-                                flag = true;
-                            },"json");
-                        },"json");
-                    },"json");
-                },"json");
-            },"json");
+            updatePage(screenName);
         },"json");
     });
 
@@ -168,7 +182,10 @@ $(document).ready(function() {
                         html = template(data);
                         $("#wall").append(html);
                         $("#divTweets").carousel("cycle");
-                        flag = true;
+
+                        $("#aDownloadTweets").attr("href","downloadTweets.php?follower="+screenName);
+
+                        updatePage(screenName);
                     },"json");
                     return item;
                 }
