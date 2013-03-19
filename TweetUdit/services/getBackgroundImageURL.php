@@ -20,7 +20,12 @@ if(mysqli_connect_errno($con)) {
 if(empty($_REQUEST['screenName']))
     $id = $_SESSION['user'];
 else {
-    $rs = mysqli_query($con,"select * from user where screen_name='".strtok($_REQUEST['screenName'],"@")."'");
+
+    if(stripos($_REQUEST['screenName'],"@")===0) {
+        $rs = mysqli_query($con,"select * from user where screen_name='".strtok($_REQUEST['screenName'],"@")."'");
+    } else {
+        $rs = mysqli_query($con,"select * from user where name='".$_REQUEST['screenName']."'");
+    }
 
     if($rs =  mysqli_fetch_array($rs)) {
         $id = $rs['id'];
