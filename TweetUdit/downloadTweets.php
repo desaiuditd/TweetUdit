@@ -115,9 +115,9 @@ $html = $html.'
 $mpdf = new mPDF('c');
 $mpdf->SetDisplayMode('fullpage');
 
-$css = file_get_contents('css/bootstrap.min.css');
+$css = file_get_contents('//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css');
 $mpdf->WriteHTML($css,1);
-$css = file_get_contents('css/bootstrap-responsive.min.css');
+$css = file_get_contents('//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css');
 $mpdf->WriteHTML($css,1);
 $css = file_get_contents('css/main.css');
 $mpdf->WriteHTML($css,1);
