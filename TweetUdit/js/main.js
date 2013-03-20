@@ -28,9 +28,7 @@ function updatePage(name) {
     if(name===null) {
 
         $.post("services/getProfileImageURL.php",function(data) {
-            console.log($("#profile_pic a img").attr("src"));
             $("#profile_pic a img").attr("src",data.profileImageURL);
-            console.log($("#profile_pic a img").attr("src"));
 
             $.post("services/getLinkColor.php",function(data) {
                 $(".follower").css("color", "#"+data.linkColor);
@@ -57,6 +55,7 @@ function updatePage(name) {
 
         $.post("services/getProfileImageURL.php",{screenName:name},function(data) {
             $("#profile_pic a img").attr("src",data.profileImageURL);
+            $("#profile_pic a").attr("href","#");
 
             $.post("services/getLinkColor.php",{screenName:name},function(data) {
                 $(".follower").css("color", "#"+data.linkColor);
@@ -99,7 +98,7 @@ function init() {
                     $("#wall h4").after(html);
                     $("#divTweets").carousel("cycle");
 
-                    updatePage(null,true);
+                    updatePage(null);
                 },"json");
             },"json");
         },"json");
@@ -173,12 +172,14 @@ $(document).ready(function() {
                         var source = $("#tmpltHeader").html();
                         var template = Handlebars.compile(source);
                         var html = template({user : screenName});
-                        $("#wall").html(html);
+                        $("#wall h4").remove();
+                        $("#wall").prepend(html);
 
                         source = $("#tmpltTweets").html();
                         template = Handlebars.compile(source);
                         html = template(data);
-                        $("#wall").append(html);
+                        $("#divTweets").remove();
+                        $("#wall h4").after(html);
                         $("#divTweets").carousel("cycle");
 
                         $("#aDownloadTweets").attr("href","downloadTweets.php?follower="+screenName);
