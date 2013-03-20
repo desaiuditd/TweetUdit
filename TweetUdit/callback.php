@@ -6,8 +6,8 @@
  */
 
 session_start();
-require_once('twitteroauth/twitteroauth.php');
-require_once('twitteroauth/config.php');
+require_once('lib/twitteroauth/twitteroauth.php');
+require_once('TwitterConfig.php');
 
 /* If access tokens are not available redirect to connect page. */
 if (isset($_REQUEST['oauth_token']) && $_SESSION['oauth_token'] !== $_REQUEST['oauth_token']) {

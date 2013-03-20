@@ -7,7 +7,7 @@
 session_start();
 require_once ('User.php');
 require_once ('Tweet.php');
-require_once ('mPDF/mpdf.php');
+require_once ('lib/mPDF/mpdf.php');
 require_once ('DBConfig.php');
 
 /* If access tokens are not available redirect to connect page. */

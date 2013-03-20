@@ -7,8 +7,8 @@
 
 /* Load required lib files. */
 session_start();
-require_once('twitteroauth/twitteroauth.php');
-require_once('twitteroauth/config.php');
+require_once('lib/twitteroauth/twitteroauth.php');
+require_once('TwitterConfig.php');
 require_once('DBConfig.php');
 require_once ('User.php');
 
@@ -130,7 +130,6 @@ $_SESSION['user']=$user->get_id();
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 $followers = $connection->get("followers/list",array("user_id"=>$user->get_id(),"skip_status "=>true,"include_user_entities ",false));
 
-//echo"<pre>";print_r($followers);echo"</pre>";
 $i=0;
 foreach ($followers->users as $follower) {
     if($i>=10) { break; }
