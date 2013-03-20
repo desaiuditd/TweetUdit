@@ -80,6 +80,6 @@ foreach ($followers->users as $follower) {
         $data[] = $follower->name;
     }
 }
-sort($data);
+
 echo json_encode($data);
 ?>
