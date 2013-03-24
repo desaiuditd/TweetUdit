@@ -11,14 +11,23 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
         <style>
             body {
                 padding-top: 60px;
                 padding-bottom: 40px;
             }
+            footer {
+                background-color: #fefefe;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+            hr {
+                margin-top: 10px;
+                margin-bottom: 5px;
+            }
         </style>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -43,7 +52,7 @@
                 <div class="clearfix">&nbsp;</div>
 
                 <div class="hero-unit">
-                    <a href="redirect.php" class="btn btn-primary btn-large offset4">Login with Twitter</a>
+                    <a style="margin-left: 40%; margin-right: 40%;" href="redirect.php" class="btn btn-primary btn-large">Login with Twitter</a>
                 </div>
 
                 <div class="clearfix">&nbsp;</div>
@@ -51,15 +60,13 @@
                 <div class="clearfix">&nbsp;</div>
                 <div class="clearfix">&nbsp;</div>
                 <div class="clearfix">&nbsp;</div>
-
-                <div class="container navbar navbar-fixed-bottom">
-                    <hr>
-                    <footer>
-                        <p class="pull-right">&copy; Udit Desai</p>
-                    </footer>
-                </div>
 
             </div> <!-- /container -->
+
+            <footer class="navbar navbar-fixed-bottom">
+                <hr>
+                <p style="margin:0;" class="pull-right">&copy; Udit Desai</p>
+            </footer>
 
             <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
