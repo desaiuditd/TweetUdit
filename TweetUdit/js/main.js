@@ -42,7 +42,6 @@ function updatePage(name) {
                         $.post("services/getBackgroundImageURL.php",function(data) {
                             $("body").css("background-image","url('"+data.bgImageURL+"')");
                             $("body").css("background-repeat","no-repeat");
-                            $("body").css("background-position","0% -15%");
 
                             flag = true;
                         },"json");
