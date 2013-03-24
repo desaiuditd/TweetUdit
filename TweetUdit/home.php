@@ -74,14 +74,23 @@ $_SESSION['user']=$user->get_id();
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css">
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
         <style>
             body {
                 padding-top: 60px;
                 padding-bottom: 40px;
             }
+            footer {
+                background-color: #fefefe;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+            hr {
+                margin-top: 10px;
+                margin-bottom: 5px;
+            }
         </style>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css">
+        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
@@ -100,7 +109,15 @@ $_SESSION['user']=$user->get_id();
                         <li id="liName" class="navbar-text"></li>
                         <li id="liScreenName" class="navbar-text"></li>
                     </ul>
-                    <a href="clearsession.php" class="btn btn-danger pull-right">Logout</a>
+                    <div class="nav dropdown  pull-right">
+                        <a class="navbar-text dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" href="#">
+                            <i class="icon-wrench"></i><span>User Actions</span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <li><a tabindex="-1" href="manageFav.php"><i class="icon-star"></i> Manage Favorites</a></li>
+                            <li><a tabindex="-1" href="clearsession.php"><i class="icon-remove-circle"></i> Logout</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -134,9 +151,9 @@ $i=0;
 foreach ($followers->users as $follower) {
     if($i>=10) { break; }
 ?>
-                        <div class="container-fluid row" style="margin-left: 0%; margin-right: 0%;">
-                            <img class="img-polaroid" src="<?echo $follower->profile_image_url;?>">
-                            <span><a class="follower" href="#">@<?echo $follower->screen_name;?></a></span>
+                        <div class="container-fluid row" style="margin-left: 5px; margin-right: 5px;">
+                            <img class="img-polaroid" src="<?php echo $follower->profile_image_url;?>">
+                            <span><a class="follower" href="#">@<?php echo $follower->screen_name;?></a></span>
                         </div>
 <?php
     $i++;
@@ -145,14 +162,15 @@ foreach ($followers->users as $follower) {
                     </div>
                 </div>
             </div>
-            <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
-            <div id="footer" class="container navbar navbar-fixed-bottom">
-                <hr>
-                <footer>
-                    <p class="pull-right">&copy; Udit Desai</p>
-                </footer>
-            </div>
         </div>
+        <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
+        <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
+
+        <footer class="navbar navbar-fixed-bottom">
+            <hr>
+            <p style="margin:0;" class="pull-right">&copy; Udit Desai</p>
+        </footer>
+
     </body>
 
     <script id="tmpltHeader" type="text/x-handlebars-template">
@@ -168,16 +186,11 @@ foreach ($followers->users as $follower) {
 
                             <div class="container-fluid row">
                                 <div class="container-fluid span">
-                                    {{#if creater_profile_image}}
-                                        <img class="img-polaroid" src="{{creater_profile_image}}">
-                                        <span><em><strong> @{{created_by}} : </strong></em>{{created_at}}</span>
-                                    {{/if}}
-                                    {{#if user.profile_image_url}}
-                                        <img class="img-polaroid" src="{{user.profile_image_url}}">
-                                        <span><em><strong> @{{user.screen_name}} : </strong></em>{{created_at}}</span>
-                                    {{/if}}
+                                    <img class="img-polaroid" src="{{creater_profile_image}}">
+                                    <span><em><strong> @{{created_by}} : </strong></em>{{created_at}}</span>
                                 </div>
-                                <div class="container-fluid span" style="margin-top: 1%">
+                                <div class="clearfix">&nbsp</div>
+                                <div class="container-fluid span">
                                     {{{text}}}
                                 </div>
                             </div>
