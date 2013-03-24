@@ -35,7 +35,6 @@ function updatePage(name) {
 
                 $.post("services/getBackgroundColor.php",function(data) {
                     $("body").css("background-color","#"+data.bgColor);
-                    $("#footer").css("background-color","#"+data.bgColor);
 
                     $.post("services/getSidebarColor.php",function(data) {
                         $("#wall,#followers").css("background-color","#"+data.sbColor);
@@ -185,6 +184,7 @@ $(document).ready(function() {
                         $("#aDownloadTweets").attr("href","downloadTweets.php?follower="+screenName);
 
                         updatePage(screenName);
+                        $("#typeahead").val("");
                     },"json");
                     return item;
                 }
