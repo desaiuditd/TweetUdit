@@ -18,7 +18,7 @@ class Tweet {
         $this->creater_profile_image = $creater_profile_image;
         $timestamp = new DateTime($created_at);
         $timestamp->setTimezone(new DateTimeZone("Asia/Kolkata"));
-        $this->created_at = $timestamp->format("D M d H:i:s Y");
+        $this->created_at = $timestamp->format("D M-d,Y H:i:s");
     }
 
     public function get_id() {
