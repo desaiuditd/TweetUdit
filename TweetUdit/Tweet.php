@@ -11,48 +11,14 @@ class Tweet {
     private $creater_profile_image;
     private $created_at;
 
-    private function getDay($i) {
-        switch($i) {
-            case 0 : return "Sun";
-            case 1 : return "Mon";
-            case 2 : return "Tue";
-            case 3 : return "Wed";
-            case 4 : return "Thurs";
-            case 5 : return "Fri";
-            case 6 : return "Sat";
-        }
-    }
-
-    private function getMonth($i) {
-        switch($i) {
-            case 1 : return "Jan";
-            case 2 : return "Feb";
-            case 3 : return "Mar";
-            case 4 : return "Apr";
-            case 5 : return "May";
-            case 6 : return "Jun";
-            case 7 : return "Jul";
-            case 8 : return "Aug";
-            case 9 : return "Sept";
-            case 10 : return "Oct";
-            case 11 : return "Nov";
-            case 12 : return "Dec";
-        }
-    }
-
     public function __construct($id, $text, $created_by, $creater_profile_image, $created_at) {
         $this->id = $id;
         $this->text = $text;
         $this->created_by = $created_by;
         $this->creater_profile_image = $creater_profile_image;
-        $this->created_at = "";
-        $this->created_at .= $this->getDay(idate("w", strtotime($created_at)))." ";
-        $this->created_at .= $this->getMonth(idate("m", strtotime($created_at)))." ";
-        $this->created_at .= idate("d", strtotime($created_at))." ";
-        $this->created_at .= idate("H", strtotime($created_at)).":";
-        $this->created_at .= idate("i", strtotime($created_at)).":";
-        $this->created_at .= idate("s", strtotime($created_at))." ";
-        $this->created_at .= idate("Y", strtotime($created_at));
+        $timestamp = new DateTime($created_at);
+        $timestamp->setTimezone(new DateTimeZone("Asia/Kolkata"));
+        $this->created_at = $timestamp->format("D M d H:i:s Y");
     }
 
     public function get_id() {
