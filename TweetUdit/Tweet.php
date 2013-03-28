@@ -48,7 +48,7 @@ class Tweet {
         $this->created_at = "";
         $this->created_at .= $this->getDay(idate("w", strtotime($created_at)))." ";
         $this->created_at .= $this->getMonth(idate("m", strtotime($created_at)))." ";
-        $this->created_at .= idate("t", strtotime($created_at))." ";
+        $this->created_at .= idate("d", strtotime($created_at))." ";
         $this->created_at .= idate("H", strtotime($created_at)).":";
         $this->created_at .= idate("i", strtotime($created_at)).":";
         $this->created_at .= idate("s", strtotime($created_at))." ";
