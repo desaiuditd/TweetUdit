@@ -86,5 +86,5 @@ foreach ($tweets as $tweet) {
 
 mysqli_close($con);
 
-echo json_encode(array_slice($tweets, 0, 10));
+echo $user->get_tweets_json();
 ?>

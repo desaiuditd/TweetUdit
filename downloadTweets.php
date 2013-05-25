@@ -65,7 +65,15 @@ $html = '
             background-position: 0% -15%;
             background-color: #'.$user->get_profile_background_color().';
         }
-
+        footer {
+            background-color: #fefefe;
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+        hr {
+            margin-top: 10px;
+            margin-bottom: 5px;
+        }
     </style>
     <body>
         <div class="tweet-box">
@@ -103,22 +111,18 @@ foreach ($user->get_tweets_object() as $tweet) {
 $html = $html.'
                 </div>
             </div>
-            <div class="container navbar navbar-fixed-bottom">
+            <div class="clearfix">&nbsp;</div>
+            <div class="clearfix">&nbsp;</div>
+            <footer class="container navbar navbar-fixed-bottom">
                 <hr>
-                <footer>
-                    <p class="pull-right">&copy; Udit Desai</p>
-                </footer>
-            </div>
+                <p class="pull-right">&copy; Udit Desai</p>
+            </footer>
         </div>
     </body>';
 
 $mpdf = new mPDF('c');
 $mpdf->SetDisplayMode('fullpage');
 
-$css = file_get_contents('//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-combined.min.css');
-$mpdf->WriteHTML($css,1);
-$css = file_get_contents('//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.1/css/bootstrap-responsive.min.css');
-$mpdf->WriteHTML($css,1);
 $css = file_get_contents('css/main.css');
 $mpdf->WriteHTML($css,1);
 

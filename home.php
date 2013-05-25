@@ -80,6 +80,15 @@ $_SESSION['user']=$user->get_id();
                 padding-top: 60px;
                 padding-bottom: 40px;
             }
+            footer {
+                background-color: #fefefe;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+            hr {
+                margin-top: 10px;
+                margin-bottom: 5px;
+            }
         </style>
         <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
         <link rel="stylesheet" href="css/main.css">
@@ -143,8 +152,13 @@ foreach ($followers->users as $follower) {
     if($i>=10) { break; }
 ?>
                         <div class="container-fluid row" style="margin-left: 5px; margin-right: 5px;">
+<<<<<<< HEAD:home.php
                             <img class="img-polaroid" src="<?echo $follower->profile_image_url;?>">
                             <span><a class="follower" href="#">@<?echo $follower->screen_name;?></a></span>
+=======
+                            <img class="img-polaroid" src="<?php echo $follower->profile_image_url;?>">
+                            <span><a class="follower" href="#">@<?php echo $follower->screen_name;?></a></span>
+>>>>>>> e345c6bab53c5ca394b8beaf263a73cfb6d1950b:TweetUdit/home.php
                         </div>
 <?php
     $i++;
@@ -153,14 +167,15 @@ foreach ($followers->users as $follower) {
                     </div>
                 </div>
             </div>
-            <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
-            <div id="footer" class="container navbar navbar-fixed-bottom">
-                <hr>
-                <footer>
-                    <p class="pull-right">&copy; Udit Desai</p>
-                </footer>
-            </div>
         </div>
+        <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
+        <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
+
+        <footer class="navbar navbar-fixed-bottom">
+            <hr>
+            <p style="margin:0;" class="pull-right">&copy; Udit Desai</p>
+        </footer>
+
     </body>
 
     <script id="tmpltHeader" type="text/x-handlebars-template">
@@ -176,16 +191,11 @@ foreach ($followers->users as $follower) {
 
                             <div class="container-fluid row">
                                 <div class="container-fluid span">
-                                    {{#if creater_profile_image}}
-                                        <img class="img-polaroid" src="{{creater_profile_image}}">
-                                        <span><em><strong> @{{created_by}} : </strong></em>{{created_at}}</span>
-                                    {{/if}}
-                                    {{#if user.profile_image_url}}
-                                        <img class="img-polaroid" src="{{user.profile_image_url}}">
-                                        <span><em><strong> @{{user.screen_name}} : </strong></em>{{created_at}}</span>
-                                    {{/if}}
+                                    <img class="img-polaroid" src="{{creater_profile_image}}">
+                                    <span><em><strong> @{{created_by}} : </strong></em>{{created_at}}</span>
                                 </div>
-                                <div class="container-fluid span" style="margin-top: 1%">
+                                <div class="clearfix">&nbsp</div>
+                                <div class="container-fluid span">
                                     {{{text}}}
                                 </div>
                             </div>

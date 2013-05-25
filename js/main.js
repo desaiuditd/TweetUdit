@@ -35,7 +35,6 @@ function updatePage(name) {
 
                 $.post("services/getBackgroundColor.php",function(data) {
                     $("body").css("background-color","#"+data.bgColor);
-                    $("#footer").css("background-color","#"+data.bgColor);
 
                     $.post("services/getSidebarColor.php",function(data) {
                         $("#wall,#followers").css("background-color","#"+data.sbColor);
@@ -43,7 +42,6 @@ function updatePage(name) {
                         $.post("services/getBackgroundImageURL.php",function(data) {
                             $("body").css("background-image","url('"+data.bgImageURL+"')");
                             $("body").css("background-repeat","no-repeat");
-                            $("body").css("background-position","0% -15%");
 
                             flag = true;
                         },"json");
@@ -185,6 +183,7 @@ $(document).ready(function() {
                         $("#aDownloadTweets").attr("href","downloadTweets.php?follower="+screenName);
 
                         updatePage(screenName);
+                        $("#typeahead").val("");
                     },"json");
                     return item;
                 }
