@@ -37,11 +37,15 @@ if($rs =  mysqli_fetch_array($rs)) {
 /* Create a TwitterOauth object with consumer/user tokens. */
 $connection = new TwitterOAuth(CONSUMER_KEY, CONSUMER_SECRET, $access_token['oauth_token'], $access_token['oauth_token_secret']);
 
-$data = $connection->get("favorites/list",array("user_id"=>$user->get_id(),"count"=>20,"include_entities"=>false));
+if(!empty($_POST['unFavTweet'])) {
+    $unFavs = $_POST['unFavTweet'];
 
-echo "<pre>";
-print_r($data);
-echo "</pre>";
+    foreach ($unFavs as $tweetID) {
+        $connection->post("favorites/destroy",array("id"=>$tweetID,"include_entities"=>false));
+    }
+}
+
+$data = $connection->get("favorites/list",array("user_id"=>$user->get_id(),"count"=>20,"include_entities"=>false));
 
 $fav = array();
 
@@ -50,9 +54,6 @@ if(count($data)!=0) {
         $fav[] = new Tweet($tweet->id_str, $tweet->text, $tweet->user->screen_name, $tweet->user->profile_image_url, $tweet->created_at);
     }
 }
-echo "<pre>";
-print_r($fav);
-echo "</pre>";
 ?>
 
 <!--
@@ -77,16 +78,22 @@ and open the template in the editor.
             body {
                 padding-top: 60px;
                 padding-bottom: 40px;
-                background-image: url('<?echo $user->get_profile_background_image_url();?>');
+                background-image: url('<?php echo $user->get_profile_background_image_url();?>');
                 background-repeat: no-repeat;
-                background-position: 0% -15%;
-                background-color: <?echo "#".$user->get_profile_background_color();?>;
+/*                background-position: 0% -15%;*/
+                background-color: <?php echo "#".$user->get_profile_background_color();?>;
             }
             #wall {
-                background-color: <?echo "#".$user->get_profile_sidebar_fill_color()?>;
+                background-color: <?php echo "#".$user->get_profile_sidebar_fill_color()?>;
             }
-            #footer {
-                background-color: <?echo "#".$user->get_profile_background_color();?>;
+            footer {
+                background-color: #fefefe;
+                margin-left: 20px;
+                margin-right: 20px;
+            }
+            hr {
+                margin-top: 10px;
+                margin-bottom: 5px;
             }
         </style>
         <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
@@ -105,8 +112,8 @@ and open the template in the editor.
                     <a href="home.php" class="brand">TweetUdit</a>
                     <ul class="nav">
                         <li class="divider-vertical"></li>
-                        <li id="liName" class="navbar-text"><?echo $user->get_name();?></li>
-                        <li id="liScreenName" class="navbar-text">&nbsp;<strong><em><a href="home.php">(@<?echo $user->get_screen_name();?>)</a></em></strong></li>
+                        <li id="liName" class="navbar-text"><?php echo $user->get_name();?></li>
+                        <li id="liScreenName" class="navbar-text">&nbsp;<strong><em><a href="home.php">(@<?php echo $user->get_screen_name();?>)</a></em></strong></li>
                     </ul>
                     <div class="nav dropdown  pull-right">
                         <a class="navbar-text dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" href="#">
@@ -122,57 +129,62 @@ and open the template in the editor.
         </div>
 
         <div class="container">
-            <div id="wall" class="container span10 offset1">
+            <div id="wall" class="container span9 offset2">
                 <div class="container-fluid tweet-box">
-                    <table id="tblFavTweets" class="table table-hover table-striped">
-                        <caption>Top <?echo count($fav)?count($fav):"";?> Favorite Tweets</caption>
-                        <thead>
-                            <tr>
-                                <th class="span1"><input id="checkAll" type="checkbox"></th>
-                                <th>Tweets</th>
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <form action="manageFav.php" method="post">
+                        <button class="btn btn-danger pull-right" type="submit">Unfavorite</button>
+                        <table id="tblFavTweets" class="table table-hover table-striped">
+                            <caption>Top <?php echo count($fav)?count($fav):"";?> Favorite Tweets</caption>
+                            <thead>
+                                <tr>
+                                    <th class="span1"><input id="checkAll" type="checkbox"></th>
+                                    <th>Tweets</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 <?php
     if(count($fav)!=0) {
         foreach ($fav as $tweet) {
 ?>
-                            <tr>
-                                <td class="span1"><input id="<?echo $tweet->get_id();?>" type="checkbox"></td>
-                                <td>
-                                    <div class="container-fluid span">
-                                        <img class="img-polaroid" src="<?echo $tweet->get_creater_profile_image();?>">
-                                        <span><em><strong> @<?echo $tweet->get_created_by();?> : </strong></em><?echo $tweet->get_created_at();?></span>
-                                    </div>
-                                    <div class="container-fluid span" style="margin-top: 1%">
-                                        <?echo $tweet->get_text();?>
-                                    </div>
-                                </td>
-                            </tr>
+                                <tr>
+                                    <td class="span1"><input value="<?php echo $tweet->get_id();?>" type="checkbox" name="unFavTweet[]"></td>
+                                    <td>
+                                        <div class="container-fluid span">
+                                            <img class="img-polaroid" src="<?php echo $tweet->get_creater_profile_image();?>">
+                                            <span><em><strong> @<?php echo $tweet->get_created_by();?> : </strong></em><?php echo $tweet->get_created_at();?></span>
+                                        </div>
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div class="container-fluid span">
+                                            <?php echo $tweet->get_text();?>
+                                        </div>
+                                    </td>
+                                </tr>
 <?php
         }
     }
     else {
 ?>
-                            <tr class="error">
-                                <td></td>
-                                <td class=""> Oops ... No Favorite Tweets !!</td>
-                            </tr>
+                                <tr class="error">
+                                    <td></td>
+                                    <td class=""> Oops ... No Favorite Tweets !!</td>
+                                </tr>
 <?php
     }
 ?>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                        <button class="btn btn-danger pull-right" type="submit">Unfavorite</button>
+                    </form>
                 </div>
             </div>
-            <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
-            <div id="footer" class="container navbar navbar-fixed-bottom">
-                <hr>
-                <footer>
-                    <p class="pull-right">&copy; Udit Desai</p>
-                </footer>
-            </div>
         </div>
+        <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
+        <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
+
+        <footer class="navbar navbar-fixed-bottom">
+            <hr>
+            <p style="margin:0;" class="pull-right">&copy; Udit Desai</p>
+        </footer>
     </body>
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>

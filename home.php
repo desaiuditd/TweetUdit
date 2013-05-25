@@ -152,13 +152,8 @@ foreach ($followers->users as $follower) {
     if($i>=10) { break; }
 ?>
                         <div class="container-fluid row" style="margin-left: 5px; margin-right: 5px;">
-<<<<<<< HEAD:home.php
                             <img class="img-polaroid" src="<?echo $follower->profile_image_url;?>">
                             <span><a class="follower" href="#">@<?echo $follower->screen_name;?></a></span>
-=======
-                            <img class="img-polaroid" src="<?php echo $follower->profile_image_url;?>">
-                            <span><a class="follower" href="#">@<?php echo $follower->screen_name;?></a></span>
->>>>>>> e345c6bab53c5ca394b8beaf263a73cfb6d1950b:TweetUdit/home.php
                         </div>
 <?php
     $i++;
