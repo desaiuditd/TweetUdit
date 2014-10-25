@@ -82,4 +82,3 @@ foreach ($followers->users as $follower) {
 }
 sort($data);
 echo json_encode($data);
-?>

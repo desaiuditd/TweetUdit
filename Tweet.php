@@ -69,4 +69,3 @@ class Tweet {
                     'created_at'=>  $this->created_at);
     }
 }
-?>

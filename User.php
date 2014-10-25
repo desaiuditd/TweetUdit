@@ -134,4 +134,3 @@ class User {
                     'tweets'=> $this->tweets);
     }
 }
-?>

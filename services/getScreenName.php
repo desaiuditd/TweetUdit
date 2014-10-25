@@ -29,4 +29,3 @@ if($rs =  mysqli_fetch_array($rs)) {
 mysqli_close($con);
 
 echo json_encode(array("screenName"=>$user->get_screen_name()));
-?>

@@ -74,7 +74,7 @@ $_SESSION['user']=$user->get_id();
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <style>
             body {
                 padding-top: 60px;
@@ -90,7 +90,7 @@ $_SESSION['user']=$user->get_id();
                 margin-bottom: 5px;
             }
         </style>
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
@@ -152,8 +152,8 @@ foreach ($followers->users as $follower) {
     if($i>=10) { break; }
 ?>
                         <div class="container-fluid row" style="margin-left: 5px; margin-right: 5px;">
-                            <img class="img-polaroid" src="<?echo $follower->profile_image_url;?>">
-                            <span><a class="follower" href="#">@<?echo $follower->screen_name;?></a></span>
+                            <img class="img-polaroid" src="<?php echo $follower->profile_image_url;?>">
+                            <span><a class="follower" href="#">@<?php echo $follower->screen_name;?></a></span>
                         </div>
 <?php
     $i++;
@@ -166,11 +166,11 @@ foreach ($followers->users as $follower) {
         <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
         <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
 
-        <footer class="navbar navbar-fixed-bottom">
-            <hr>
-            <p style="margin:0;" class="pull-right">&copy; Udit Desai</p>
-        </footer>
-
+        <div id="footer">
+	        <div class="container">
+		        <p class="muted credit pull-right">&copy; <a href="http://blog.incognitech.in">Udit Desai</a></p>
+	        </div>
+        </div>
     </body>
 
     <script id="tmpltHeader" type="text/x-handlebars-template">
@@ -207,10 +207,10 @@ foreach ($followers->users as $follower) {
         </div>
     </script>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/1.0.0-rc.3/handlebars.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/spin.js/1.2.7/spin.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/handlebars.min.js"></script>
+    <script src="js/spin.min.js"></script>
     <script src="js/main.js"></script>
 
 </html>

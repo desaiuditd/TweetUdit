@@ -12,6 +12,5 @@
 
 $host = "localhost";
 $username = "root";
-$password = "";
-$dbName = "TweetUdit";
-?>
+$password = "UG3JXRKjmo8jslj";
+$dbName = "tweetudit_me";

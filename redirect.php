@@ -27,4 +27,3 @@ switch ($connection->http_code) {
         /* Error */
         header('Location: error.html'); 
 }
-?>

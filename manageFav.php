@@ -49,7 +49,7 @@ $data = $connection->get("favorites/list",array("user_id"=>$user->get_id(),"coun
 
 $fav = array();
 
-if(count($data)!=0) {
+if(count($data)!=0 && is_array($data)) {
     foreach ($data as $tweet) {
         $fav[] = new Tweet($tweet->id_str, $tweet->text, $tweet->user->screen_name, $tweet->user->profile_image_url, $tweet->created_at);
     }
@@ -73,7 +73,7 @@ and open the template in the editor.
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
         <style>
             body {
                 padding-top: 60px;
@@ -96,7 +96,7 @@ and open the template in the editor.
                 margin-bottom: 5px;
             }
         </style>
-        <link rel="stylesheet" href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css">
+        <link rel="stylesheet" href="css/bootstrap-responsive.css">
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
@@ -181,14 +181,15 @@ and open the template in the editor.
         <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
         <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
 
-        <footer class="navbar navbar-fixed-bottom">
-            <hr>
-            <p style="margin:0;" class="pull-right">&copy; Udit Desai</p>
-        </footer>
+        <div id="footer">
+	        <div class="container">
+		        <p class="muted credit pull-right">&copy; <a href="http://blog.incognitech.in">Udit Desai</a></p>
+	        </div>
+        </div>
     </body>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/manageFav.js"></script>
 
 </html>

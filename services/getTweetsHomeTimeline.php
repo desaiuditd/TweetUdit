@@ -41,18 +41,18 @@ $tweets = $connection->get("statuses/home_timeline",array("count"=>10,"exclude_r
 
 mysqli_query($con, "delete from tweet where user_id='' or user_id = '".$user->get_id()."'");
 
-foreach ($tweets as $tweet) {
-    $user->set_tweets(new Tweet($tweet->id_str, $tweet->text, $tweet->user->screen_name, $tweet->user->profile_image_url, $tweet->created_at));
-    mysqli_query($con, "insert into tweet values (
-                            '".$tweet->id_str."',
-                            '".addslashes($tweet->text)."',
-                            '".$tweet->user->screen_name."',
-                            '".$tweet->user->profile_image_url."',
-                            '".$tweet->created_at."',
-                            '".$user->get_id()."')") or die(mysqli_error($con));
+if(count($tweets)!=0 && is_array($tweets)) {
+	foreach ($tweets as $tweet) {
+	    $user->set_tweets(new Tweet($tweet->id_str, $tweet->text, $tweet->user->screen_name, $tweet->user->profile_image_url, $tweet->created_at));
+	    mysqli_query($con, "insert into tweet values (
+	                            '".$tweet->id_str."',
+	                            '".addslashes($tweet->text)."',
+	                            '".$tweet->user->screen_name."',
+	                            '".$tweet->user->profile_image_url."',
+	                            '".$tweet->created_at."',
+	                            '".$user->get_id()."')") or die(mysqli_error($con));
+	}
 }
-
 mysqli_close($con);
 
 echo $user->get_tweets_json();
-?>

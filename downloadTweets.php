@@ -131,4 +131,3 @@ $mpdf->WriteHTML($html);
 $mpdf->Output("TweetUdit.pdf","D");
 
 exit;
-?>

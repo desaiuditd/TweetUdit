@@ -44,4 +44,3 @@ if($rs =  mysqli_fetch_array($rs)) {
 mysqli_close($con);
 
 echo json_encode(array("profileImageURL"=>$user->get_profile_image_url()));
-?>

@@ -7,5 +7,4 @@
 
 define('CONSUMER_KEY',"inemzu9THx0FcsqHsaPWPw");
 define('CONSUMER_SECRET',"pzQTlVrrIbncSUU3fIK8F1kkAbVbfMCKIhP4WrHfpg");
-define('OAUTH_CALLBACK', "http://localhost/TweetUdit/callback.php");
-?>
+define('OAUTH_CALLBACK', "http://tweetudit.me/callback.php");

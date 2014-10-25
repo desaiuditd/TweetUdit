@@ -37,4 +37,3 @@ if (200 == $connection->http_code) {
     /* Error*/
     header('Location: error.html');
 }
-?>
